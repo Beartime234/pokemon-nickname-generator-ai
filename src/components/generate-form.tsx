@@ -70,6 +70,7 @@ export function GenerateForm() {
                     "Could not generate nicknames. Please try again later.",
                 variant: "destructive",
             })
+            setIsSubmitting(false)
             throw error
         }
     }

@@ -46,7 +46,7 @@ export function NicknameCard({
     const imageSrc = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon_no}.png`
 
     return (
-        <Card className={cn("h-[450px] w-[350px] md:w-[500px]  md:h-[475px]", className)} {...props}>
+        <Card className={cn("h-[450px] w-[350px] md:w-[550px]  md:h-[475px]", className)} {...props}>
             <CardHeader className={"sm:pb-1"}>
                 <CardTitle>
                     {pokemonName}

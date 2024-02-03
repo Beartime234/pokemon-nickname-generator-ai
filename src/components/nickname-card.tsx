@@ -40,7 +40,7 @@ export function NicknameCard({
     async function onRetry() {
         setIsTryingAgain(true)
         const id = await generate_nicknames(pokemon_no, theme)
-        router.push(`/nickname/${id}`)
+        router.push('/nickname/' + id)
     }
 
     const imageSrc = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon_no}.png`
@@ -84,8 +84,7 @@ export function NicknameCard({
                         className="w-full"
                         onClick={onRetry}
                     >
-                        <CrossCircledIcon className="mr-2 h-4 w-4" /> I don't
-                        like any of these
+                        <CrossCircledIcon className="mr-2 h-4 w-4" /> I don&apos;t like any of these
                     </Button>
                 )}
             </CardFooter>

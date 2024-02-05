@@ -76,3 +76,9 @@ To learn more about Next.js, take a look at the following resources:
 -   [FastAPI Documentation](https://fastapi.tiangolo.com/) - learn about FastAPI features and API.
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+
+TODO 
+- Get minnie setup on the API
+- Think of themes
+- Start writing vercel blog
+- maybe then do a vercel + fastapi + nextjs blog

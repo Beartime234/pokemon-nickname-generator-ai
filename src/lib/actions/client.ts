@@ -1,7 +1,7 @@
 "use client"
 
 import { nanoid } from "../utils"
-import { kvData, localStorageData } from "@/lib/actions/types"
+import { kvData, localStorageData, validMaxLengths } from "@/lib/actions/types"
 import { save_nicknames } from "@/lib/actions/server"
 import { PokemonMap } from "@/lib/pokemon"
 
@@ -12,7 +12,7 @@ interface generateNicknamesResponse {
 const recentNicknamesKey = "recentNicknames"
 const recentNicknamesMax = 10
 
-export async function generate_nicknames(pokemon_dex: number, theme?: string) {
+export async function generate_nicknames(pokemon_dex: number, maxLength: validMaxLengths, theme?: string) {
     const pokemonName = PokemonMap.get(pokemon_dex)?.name
 
     if (pokemonName === undefined) {
@@ -21,6 +21,9 @@ export async function generate_nicknames(pokemon_dex: number, theme?: string) {
 
     // Generate URL
     let url = `/api/generate?pokemon=${encodeURIComponent(pokemonName)}`
+    if (maxLength === 12) {
+        url += `&max_length=` + 12
+    }
     if (theme) {
         url += `&theme=${encodeURIComponent(theme)}`
     }
@@ -33,6 +36,7 @@ export async function generate_nicknames(pokemon_dex: number, theme?: string) {
     // Add to KV
     const kvData: kvData = {
         pokemon: pokemon_dex,
+        length: maxLength,
         theme,
         nicknames: data.nicknames,
     }

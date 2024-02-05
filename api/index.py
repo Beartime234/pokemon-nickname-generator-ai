@@ -1,4 +1,4 @@
-from typing import Annotated, Optional
+from typing import Annotated, Optional, Literal
 
 from fastapi import FastAPI, Query
 from openai import OpenAI
@@ -33,15 +33,16 @@ app = FastAPI(
 @app.get("/api/generate")
 def generate_nickname(
         pokemon: Annotated[str, Query(max_length=12, min_length=3)],
+        max_length: Annotated[int, Query(gt=10, lt=20)] = 10,
         theme: Annotated[Optional[str], Query(max_length=12, min_length=3)] = None,
         amount: Annotated[int, Query(ge=1, le=5)] = 5):
     system_prompt = create_system_prompt(theme)
-    user_prompt = create_user_prompt(pokemon, amount)
+    user_prompt = create_user_prompt(pokemon, amount, max_length)
     response = client.chat.completions.create(
         model="gpt-3.5-turbo-1106",
         response_format={"type": "json_object"},
         messages=[
-            {"role": "system", "content": system_prompt},
+            {"role": "assistant", "content": system_prompt},
             {"role": "user", "content": user_prompt}
         ]
     )

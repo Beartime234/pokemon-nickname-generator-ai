@@ -27,8 +27,11 @@ import { ThemeMap } from "@/lib/theme"
 import { useRouter } from "next/navigation"
 import { generate_nicknames } from "@/lib/actions/client"
 import React from "react"
-import { ReloadIcon } from "@radix-ui/react-icons"
+import { QuestionMarkCircledIcon, ReloadIcon } from "@radix-ui/react-icons"
 import { Loading } from "@/components/loading"
+import { Switch } from "@/components/ui/switch"
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
+import { validMaxLengths } from "@/lib/actions/types"
 
 const PokemonOptions = Array.from(PokemonMap.entries()).map(([id, pokemon]) => (
     <SelectItem key={pokemon.name} value={id.toString()}>
@@ -46,6 +49,7 @@ const FormSchema = z.object({
     pokemon: z.string({
         required_error: "You must select a Pokemon",
     }),
+    generationSixPlus: z.boolean().default(false),
     theme: z.string().optional(),
 })
 
@@ -61,7 +65,11 @@ export function GenerateForm() {
         setIsSubmitting(true)
         try {
             const pokemon_no = parseInt(data.pokemon)
-            const id = await generate_nicknames(pokemon_no, data.theme)
+            let maxLength: validMaxLengths = 10
+            if (data.generationSixPlus) {
+                maxLength = 12
+            }
+            const id = await generate_nicknames(pokemon_no, maxLength, data.theme)
             router.push(`/nickname/${id}`)
         } catch (error) {
             toast({
@@ -104,7 +112,6 @@ export function GenerateForm() {
                         </FormItem>
                     )}
                 />
-
                 <FormField
                     control={form.control}
                     name="theme"
@@ -114,7 +121,6 @@ export function GenerateForm() {
                             <Select
                                 onValueChange={field.onChange}
                                 defaultValue={field.value}
-
                             >
                                 <FormControl>
                                     <SelectTrigger>
@@ -127,6 +133,35 @@ export function GenerateForm() {
                             </Select>
                             <FormDescription>Optional</FormDescription>
                             <FormMessage />
+                        </FormItem>
+                    )}
+                />
+                <FormField
+                    control={form.control}
+                    name="generationSixPlus"
+                    render={({ field }) => (
+                        <FormItem
+                            className="space-x-1">
+                            <div className={"flex flex-row items-center space-x-1.5"}>
+                                <FormLabel>
+                                    Generation {field.value ? "6+" : "1-5"}
+                                </FormLabel>
+                                <TooltipProvider>
+                                    <Tooltip delayDuration={100} >
+                                        <TooltipTrigger asChild>
+                                            <QuestionMarkCircledIcon />
+                                        </TooltipTrigger>
+                                        <TooltipContent>
+                                            Generation 1-5 has a max of 10 Characters where as 6+ allow 12.
+                                        </TooltipContent>
+                                    </Tooltip>
+                                </TooltipProvider>
+                            </div>
+                            <Switch
+                                checked={field.value}
+                                defaultChecked={field.value}
+                                onCheckedChange={field.onChange}
+                            />
                         </FormItem>
                     )}
                 />

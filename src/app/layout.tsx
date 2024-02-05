@@ -6,15 +6,23 @@ import { Menu } from "@/components/menu"
 import React from "react"
 import { Header } from "@/components/header"
 import Footer from "@/components/footer"
+import { SpeedInsights } from '@vercel/speed-insights/next';
+import { Metadata } from "next"
+
 
 const fontSans = FontSans({
     subsets: ["latin"],
     variable: "--font-sans",
 })
 
-export const metadata = {
+export const metadata: Metadata = {
     title: "Pokemon AI Name Generator",
     description: "A Pokemon name generator powered by AI.",
+    metadataBase: new URL("https://nickname.poketime.dev"),
+    robots: {
+        follow: true,
+        index: true,
+    },
 }
 
 export default function RootLayout({
@@ -24,9 +32,8 @@ export default function RootLayout({
 }) {
     return (
         <html lang="en">
-            <head />
-            <body className={fontSans.className}>
-                <Toaster />
+        <body className={fontSans.className}>
+        <Toaster />
                 <ThemeProvider
                     attribute="class"
                     defaultTheme="system"
@@ -39,6 +46,7 @@ export default function RootLayout({
                     <Header />
                     <div className="flex flex-col items-center justify-center">
                         {children}
+                        <SpeedInsights />
                     </div>
                     <Footer />
                 </ThemeProvider>

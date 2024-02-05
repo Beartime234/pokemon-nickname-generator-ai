@@ -28,6 +28,7 @@ export default async function Result({
             <div className="p-2 pb-3">
                 <NicknameCard
                     pokemon_no={data.pokemon}
+                    length={data.length}
                     nicknames={data.nicknames}
                     theme={data.theme}
                 />

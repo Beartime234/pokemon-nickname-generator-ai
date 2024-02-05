@@ -18,9 +18,11 @@ import { useRouter } from "next/navigation"
 import React from "react"
 import { PokemonMap } from "@/lib/pokemon"
 import { Badge } from "@/components/ui/badge"
+import { validMaxLengths } from "@/lib/actions/types"
 
 type NicknameCardProps = {
     pokemon_no: number
+    length: validMaxLengths
     nicknames: string[]
     theme?: string
 } & React.ComponentProps<typeof Card>
@@ -28,6 +30,7 @@ type NicknameCardProps = {
 export function NicknameCard({
     className,
     pokemon_no,
+    length,
     theme,
     nicknames,
     ...props
@@ -39,7 +42,7 @@ export function NicknameCard({
 
     async function onRetry() {
         setIsTryingAgain(true)
-        const id = await generate_nicknames(pokemon_no, theme)
+        const id = await generate_nicknames(pokemon_no, length, theme)
         router.push('/nickname/' + id)
     }
 

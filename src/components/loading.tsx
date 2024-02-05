@@ -8,23 +8,28 @@ export function Loading() {
     const [progress, setProgress] = React.useState(13)
 
     React.useEffect(() => {
-        const timer = setTimeout(() => setProgress(35), 500)
+        const timer = setTimeout(() => setProgress(20), 750)
         return () => clearTimeout(timer)
     }, [])
 
     React.useEffect(() => {
-        const timer = setTimeout(() => setProgress(55), 1000)
+        const timer = setTimeout(() => setProgress(35), 1250)
+        return () => clearTimeout(timer)
+    }, [])
+
+    React.useEffect(() => {
+        const timer = setTimeout(() => setProgress(55), 2000)
         return () => clearTimeout(timer)
     }, [])
 
 
     React.useEffect(() => {
-        const timer = setTimeout(() => setProgress(85), 1500)
+        const timer = setTimeout(() => setProgress(85), 2500)
         return () => clearTimeout(timer)
     }, [])
 
     React.useEffect(() => {
-        const timer = setTimeout(() => setProgress(100), 2200)
+        const timer = setTimeout(() => setProgress(100), 3000)
         return () => clearTimeout(timer)
     }, [])
 

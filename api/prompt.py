@@ -5,7 +5,7 @@ from .theme import THEMES
 SYS_PROMPT = """
 You are an assistant designed to output JSON. You are given a Pokemon's name and the number of nicknames to create.
 You must give them in a form of the list with the key `nicknames` and the value being a list of strings.
-Each nickname be unique and have a length between 3 and 12 characters. 
+Each nickname be unique and have a length between 3 and 10 characters. 
 Try to avoid using the Pokemon's name in the nickname.
 Use the characteristics of the Pokemon to create a nickname.
 """

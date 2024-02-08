@@ -26,12 +26,13 @@ import { PokemonMap } from "@/lib/pokemon"
 import { ThemeMap } from "@/lib/theme"
 import { useRouter } from "next/navigation"
 import { generate_nicknames } from "@/lib/actions/client"
-import React from "react"
+import React, { useEffect } from "react"
 import { QuestionMarkCircledIcon, ReloadIcon } from "@radix-ui/react-icons"
 import { Loading } from "@/components/loading"
 import { Switch } from "@/components/ui/switch"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 import { validMaxLengths } from "@/lib/actions/types"
+import { capitalize } from "@/lib/utils"
 
 const PokemonOptions = Array.from(PokemonMap.entries()).map(([id, pokemon]) => (
     <SelectItem key={pokemon.name} value={id.toString()}>
@@ -41,7 +42,7 @@ const PokemonOptions = Array.from(PokemonMap.entries()).map(([id, pokemon]) => (
 
 const ThemeOptions = Array.from(ThemeMap.entries()).map(([name, data]) => (
     <SelectItem key={name} value={name}>
-        {name}
+        {capitalize(name)}
     </SelectItem>
 ))
 
@@ -50,19 +51,35 @@ const FormSchema = z.object({
         required_error: "You must select a Pokemon",
     }),
     generationSixPlus: z.boolean().default(false),
-    theme: z.string().optional(),
+    theme: z.string().optional()
 })
 
-export function GenerateForm() {
+export function GenerateForm(
+) {
     const router = useRouter()
     const [isSubmitting, setIsSubmitting] = React.useState(false)
     const form = useForm<z.infer<typeof FormSchema>>({
         resolver: zodResolver(FormSchema),
     })
 
+    useEffect(() => {
+        // Set the previous selected theme if it exists
+        setTimeout(() => {
+            const previousSelectedTheme = localStorage.getItem("previousSelectedTheme")
+            if (previousSelectedTheme) {
+                form.setValue("theme", previousSelectedTheme)
+            }
+        }, 500)
+    }, [])
 
     async function onSubmit(data: z.infer<typeof FormSchema>) {
         setIsSubmitting(true)
+        if (data.theme === "none" || !data.theme) {
+            data.theme = undefined
+            localStorage.removeItem("previousSelectedTheme")
+        } else {
+            localStorage.setItem("previousSelectedTheme", data.theme || "")
+        }
         try {
             const pokemon_no = parseInt(data.pokemon)
             let maxLength: validMaxLengths = 10
@@ -97,7 +114,7 @@ export function GenerateForm() {
                             <FormLabel>Pokemon</FormLabel>
                             <Select
                                 onValueChange={field.onChange}
-                                defaultValue={field.value}
+                                value={field.value}
                             >
                                 <FormControl>
                                     <SelectTrigger>
@@ -112,6 +129,7 @@ export function GenerateForm() {
                         </FormItem>
                     )}
                 />
+
                 <FormField
                     control={form.control}
                     name="theme"
@@ -120,7 +138,7 @@ export function GenerateForm() {
                             <FormLabel>Theme</FormLabel>
                             <Select
                                 onValueChange={field.onChange}
-                                defaultValue={field.value}
+                                value={field.value}
                             >
                                 <FormControl>
                                     <SelectTrigger>
@@ -128,6 +146,7 @@ export function GenerateForm() {
                                     </SelectTrigger>
                                 </FormControl>
                                 <SelectContent position={"popper"} sideOffset={5}>
+                                    <SelectItem value={"none"}>None</SelectItem>
                                     {ThemeOptions}
                                 </SelectContent>
                             </Select>

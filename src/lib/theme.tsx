@@ -7,8 +7,8 @@ interface ThemeData {
 // The logic/prompting for them is in the API
 
 export const ThemeMap = new Map<string, ThemeData>([
-    ["Cute", { color: "pink" }],
-    ["Cool", { color: "blue" }],
-    ["Tough", { color: "red" }],
+    ["cute", { color: "pink" }],
+    ["cool", { color: "blue" }],
+    ["tough", { color: "red" }],
 ])
 

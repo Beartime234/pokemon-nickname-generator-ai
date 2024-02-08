@@ -2,7 +2,7 @@
 
 import { CrossCircledIcon, ReloadIcon } from "@radix-ui/react-icons"
 
-import { cn } from "@/lib/utils"
+import { capitalize, cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import {
     Card,
@@ -56,7 +56,7 @@ export function NicknameCard({
                     {theme &&  (
                         <span className={"float-right"}>
                             <Badge>
-                                {theme}
+                                {capitalize(theme)}
                             </Badge>
                         </span>
                     )}

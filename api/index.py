@@ -47,6 +47,7 @@ def generate_nickname(
     response = client.chat.completions.create(
         model="gpt-3.5-turbo-0125",
         response_format={"type": "json_object"},
+        temperature=1.2,
         messages=[
             {"role": "assistant", "content": assistant_prompt},
             {"role": "user", "content": user_prompt}

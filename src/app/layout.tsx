@@ -16,13 +16,30 @@ const fontSans = FontSans({
 })
 
 export const metadata: Metadata = {
-    title: "Pokemon AI Name Generator",
+    title: {
+        default: "AI Pokemon Nickname Generator",
+        template: "%s | AI Pokemon Nickname Generator",
+    },
     description: "A Pokemon name generator powered by AI.",
     metadataBase: new URL("https://nickname.poketime.dev"),
     robots: {
         follow: true,
         index: true,
     },
+    generator: "AI Pokemon Nickname Generator",
+    applicationName: "AI Pokemon Nickname Generator",
+    referrer: "origin-when-cross-origin",
+    keywords: ["pokemon", "nickname", "generator", "ai"],
+    authors: [{ name: "Joshua Eaton", url: "https://josheaton.co.nz"}],
+    creator: "Joshua Eaton",
+    formatDetection: {
+        email: false,
+        address: false,
+        telephone: false,
+    },
+    twitter: {
+        card: "summary",
+    }
 }
 
 export default function RootLayout({

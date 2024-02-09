@@ -1,9 +1,13 @@
-import { Main } from "@/components/main"
 import { get_nicknames } from "@/lib/actions/server"
 import { NicknameCard } from "@/components/nickname-card"
 import { Button } from "@/components/ui/button"
 import React from "react"
 import Link from "next/link"
+import { Metadata } from "next"
+
+export const metadata: Metadata = {
+    title: "Nickname",
+}
 
 export default async function Result({
     params,

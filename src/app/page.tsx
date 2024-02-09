@@ -1,9 +1,10 @@
 import React from "react"
-import { Main } from "@/components/main"
-import { Menu } from "@/components/menu"
-import { Header } from "@/components/header"
 import { GenerateForm } from "@/components/generate-form"
+import { Metadata } from "next"
 
+export const metadata: Metadata = {
+    title: "Create a Pokemon Nickname",
+}
 export default function Home() {
     return (
         <>

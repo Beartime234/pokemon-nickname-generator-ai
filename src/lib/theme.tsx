@@ -9,6 +9,9 @@ interface ThemeData {
 export const ThemeMap = new Map<string, ThemeData>([
     ["cute", { color: "pink" }],
     ["cool", { color: "blue" }],
-    ["tough", { color: "red" }],
+    ["strong", { color: "red" }],
+    ["mythology", { color: "purple" }],
+    ["botanical", { color: "green" }],
+    ["coffee", { color: "brown" }],
 ])
 

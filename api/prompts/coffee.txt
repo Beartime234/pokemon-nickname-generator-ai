@@ -1,0 +1,9 @@
+Use the theme of coffee for creating nicknames. Defined as drinks you can buy at a coffee shop.
+
+Avoid using full Pokemon names and the theme name. Ensure a strong link between the Pokemon's attributes and the theme. Each nickname should combine an aspect of each.
+
+Example:
+For an electric-type Pokemon:
+
+pokemon: Jolteon
+nicknames: EspressoSpark, ZapuccinoBolt, VoltMocha

@@ -15,6 +15,7 @@ import { PokemonMap } from "@/lib/pokemon"
 import Link from "next/link"
 import { nextLocalStorage } from "@/lib/utils"
 import { Badge } from "@/components/ui/badge"
+import { ThemeBadge } from "@/components/theme-badge"
 
 
 export function Previous() {
@@ -81,9 +82,7 @@ const RecentNickname = ({ key, nicknameData, onClick}: {
             </Button>
             {
                 nicknameData.theme && (
-                    <Badge>
-                        {nicknameData.theme}
-                    </Badge>
+                    <ThemeBadge theme={nicknameData.theme} />
                 )
             }
         </React.Fragment>

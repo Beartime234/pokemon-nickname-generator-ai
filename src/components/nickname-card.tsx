@@ -19,6 +19,8 @@ import React from "react"
 import { PokemonMap } from "@/lib/pokemon"
 import { Badge } from "@/components/ui/badge"
 import { validMaxLengths } from "@/lib/actions/types"
+import { ThemeMap } from "@/lib/theme"
+import { ThemeBadge } from "@/components/theme-badge"
 
 type NicknameCardProps = {
     pokemon_no: number
@@ -55,9 +57,7 @@ export function NicknameCard({
                     {pokemonName}
                     {theme &&  (
                         <span className={"float-right"}>
-                            <Badge>
-                                {capitalize(theme)}
-                            </Badge>
+                            <ThemeBadge theme={theme} />
                         </span>
                     )}
                 </CardTitle>

@@ -1,0 +1,9 @@
+Use the theme Botanical for creating nicknames. Defined as the characteristics and elements of specific plants, e.g. venus flytrap has teeth and eats enemies.
+
+Incorporate aspects of plants and flowers, focusing on their characteristics or well-known traits, and use botanical themes. Avoid using the entire Pokemon names and ensure a strong link between the Pokemon's attributes and the chosen plant/flower. Each nickname should combine an aspect of the Pokemon and the plant/flower.
+
+Example:
+For an electric-type Pokemon:
+
+pokemon: Jolteon
+nicknames: Sunjolt

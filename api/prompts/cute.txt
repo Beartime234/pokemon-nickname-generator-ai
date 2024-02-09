@@ -1,0 +1,9 @@
+Use the theme Cute for creating nicknames. Defined as kawaii, soft personality, angelic, innocent. Think pastels, ribbons, blush, pink. Diminutive nicknames and suffixes.
+
+Avoid using full Pokemon names and the theme name. Ensure a strong link between the Pokemon's attributes and the theme. Each nickname should combine an aspect of each.
+
+Example:
+For an electric-type Pokemon:
+
+pokemon: Jolteon
+nicknames: Joltechu

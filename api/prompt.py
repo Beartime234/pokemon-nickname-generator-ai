@@ -5,11 +5,11 @@ from typing import Optional
 logger = logging.getLogger(__name__)
 
 BASE_PROMPT = """
-Create a JSON object with the key nicknames and a list of unique, concise strings for a given Pokemon, considering its characteristics.
-You must give them in a form of the list with the key `nicknames` and the value being a list of strings.
+You are an assistant designed to output JSON. You are given a Pokemon's name and the number of nicknames to create.
+You must give them in a form of the list with the key nicknames and the value being a list of strings.
+
 Each nickname must be unique. Shorter and more succinct names the better.
-Try to avoid using the Pokemon's name in the nickname.
-Use the characteristics of the Pokemon to create a nickname.
+Combine both the characteristics of the Pokemon and the theme to create a nickname.
 """
 
 

@@ -69,8 +69,8 @@ export function GenerateForm(
             if (previousSelectedTheme) {
                 form.setValue("theme", previousSelectedTheme)
             }
-        }, 500)
-    }, [])
+        }, 250)
+    }, [form])
 
     async function onSubmit(data: z.infer<typeof FormSchema>) {
         setIsSubmitting(true)

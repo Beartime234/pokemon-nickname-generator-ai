@@ -11,7 +11,7 @@ export function ModeToggle() {
     const { setTheme } = useTheme()
 
     const toggleTheme = () => {
-        const currentTheme = nextLocalStorage()?.getItem("theme")  // The theme is stored in localStorage
+        const currentTheme = nextLocalStorage()?.getItem("theme") // The theme is stored in localStorage
         currentTheme === "dark" ? setTheme("light") : setTheme("dark")
     }
 

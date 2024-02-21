@@ -13,14 +13,19 @@ type ThemeBadgeProps = {
 
 export function ThemeBadge(props: ThemeBadgeProps) {
     const { theme } = props
-    const themeColor = theme ? ThemeMap.get(theme)?.color || "primary" : "primary"
+    const themeColor = theme
+        ? ThemeMap.get(theme)?.color || "primary"
+        : "primary"
 
     // @ts-ignore
     return (
-    <Badge
-          /*
+        <Badge
+            /*
           // @ts-ignore */
-        className="bg-[var(--badge)] text-white hover:bg-[var(--badge)]" style={{ "--badge": themeColor }}>
-        {capitalize(theme)}
-    </Badge>)
+            className="bg-[var(--badge)] text-white hover:bg-[var(--badge)]"
+            style={{ "--badge": themeColor }}
+        >
+            {capitalize(theme)}
+        </Badge>
+    )
 }

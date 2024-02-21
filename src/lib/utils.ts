@@ -12,8 +12,6 @@ export const nanoid = customAlphabet(
     6
 )
 
-
-
 export const isBrowser = (): boolean => {
     return typeof window !== "undefined"
 }
@@ -23,7 +21,6 @@ export const nextLocalStorage = (): Storage | void => {
     }
 }
 
-
 export const capitalize = (str: string) => {
-    return str.charAt(0).toUpperCase() + str.slice(1);
+    return str.charAt(0).toUpperCase() + str.slice(1)
 }

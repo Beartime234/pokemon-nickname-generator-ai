@@ -270,7 +270,7 @@ export const PokemonMap = new Map<number, PokemonData>([
     [265, { name: "Wurmple" }],
     [266, { name: "Silcoon" }],
     [267, { name: "Beautifly" }],
-    [268, { name : "Cascoon" }],
+    [268, { name: "Cascoon" }],
     [269, { name: "Dustox" }],
     [270, { name: "Lotad" }],
     [271, { name: "Lombre" }],

@@ -1,6 +1,7 @@
 import React from "react"
 import {
-    Dialog, DialogContent,
+    Dialog,
+    DialogContent,
     DialogDescription,
     DialogFooter,
     DialogHeader,
@@ -8,7 +9,11 @@ import {
     DialogTrigger,
 } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
-import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card"
+import {
+    HoverCard,
+    HoverCardContent,
+    HoverCardTrigger,
+} from "@/components/ui/hover-card"
 
 export default function Footer() {
     return (
@@ -48,24 +53,40 @@ export default function Footer() {
                         </DialogTrigger>
                         <DialogContent className="sm:max-w-[225px]">
                             <DialogHeader>
-                                <DialogTitle className="pb-2">Acknowledgments</DialogTitle>
+                                <DialogTitle className="pb-2">
+                                    Acknowledgments
+                                </DialogTitle>
                                 <DialogDescription className={"space-y-1.5"}>
                                     <ul>
-                                        <Acknowledgment name={"Spirals"} link={"https://github.com/steven-tey/spirals"}
-                                            description={"The project that inspired this one - Used as a reference for the UI/UX"}
-                                        />
-                                        <Acknowledgment name={"nextjs-fastapi-starter"} link={"https://github.com/digitros/nextjs-fastapi"}
-                                            description={"The starter template for this project"}
+                                        <Acknowledgment
+                                            name={"Spirals"}
+                                            link={
+                                                "https://github.com/steven-tey/spirals"
+                                            }
+                                            description={
+                                                "The project that inspired this one - Used as a reference for the UI/UX"
+                                            }
                                         />
                                         <Acknowledgment
-                                            name={"PokeAPI Sprites"} link={"https://github.com/PokeAPI/sprites"}
+                                            name={"nextjs-fastapi-starter"}
+                                            link={
+                                                "https://github.com/digitros/nextjs-fastapi"
+                                            }
+                                            description={
+                                                "The starter template for this project"
+                                            }
+                                        />
+                                        <Acknowledgment
+                                            name={"PokeAPI Sprites"}
+                                            link={
+                                                "https://github.com/PokeAPI/sprites"
+                                            }
                                             description={"Pokemon sprites"}
                                         />
                                     </ul>
                                 </DialogDescription>
                             </DialogHeader>
-                            <div className="grid gap-4 py-4">
-                            </div>
+                            <div className="grid gap-4 py-4"></div>
                         </DialogContent>
                     </Dialog>
                 </li>
@@ -74,9 +95,15 @@ export default function Footer() {
     )
 }
 
-
-
-const Acknowledgment = ({ name, link, description }: { name: string, link: string, description: string }) => (
+const Acknowledgment = ({
+    name,
+    link,
+    description,
+}: {
+    name: string
+    link: string
+    description: string
+}) => (
     <HoverCard openDelay={200} closeDelay={100}>
         <HoverCardTrigger asChild>
             <li>
@@ -86,7 +113,7 @@ const Acknowledgment = ({ name, link, description }: { name: string, link: strin
             </li>
         </HoverCardTrigger>
         <HoverCardContent className="w-75" side={"left"}>
-        <div className="space-y-1">
+            <div className="space-y-1">
                 <h4 className="text-sm font-semibold">{name}</h4>
                 <p className="text-xs text-muted-foreground">{description}</p>
             </div>

@@ -22,7 +22,6 @@ export function Loading() {
         return () => clearTimeout(timer)
     }, [])
 
-
     React.useEffect(() => {
         const timer = setTimeout(() => setProgress(85), 2500)
         return () => clearTimeout(timer)

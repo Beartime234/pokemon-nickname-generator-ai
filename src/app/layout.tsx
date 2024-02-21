@@ -6,9 +6,8 @@ import { Menu } from "@/components/menu"
 import React from "react"
 import { Header } from "@/components/header"
 import Footer from "@/components/footer"
-import { SpeedInsights } from '@vercel/speed-insights/next';
+import { SpeedInsights } from "@vercel/speed-insights/next"
 import { Metadata } from "next"
-
 
 const fontSans = FontSans({
     subsets: ["latin"],
@@ -30,7 +29,7 @@ export const metadata: Metadata = {
     applicationName: "AI Pokemon Nickname Generator",
     referrer: "origin-when-cross-origin",
     keywords: ["pokemon", "nickname", "generator", "ai"],
-    authors: [{ name: "Joshua Eaton", url: "https://josheaton.co.nz"}],
+    authors: [{ name: "Joshua Eaton", url: "https://josheaton.co.nz" }],
     creator: "Joshua Eaton",
     formatDetection: {
         email: false,
@@ -39,7 +38,7 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: "summary",
-    }
+    },
 }
 
 export default function RootLayout({
@@ -49,8 +48,8 @@ export default function RootLayout({
 }) {
     return (
         <html lang="en">
-        <body className={fontSans.className}>
-        <Toaster />
+            <body className={fontSans.className}>
+                <Toaster />
                 <ThemeProvider
                     attribute="class"
                     defaultTheme="system"

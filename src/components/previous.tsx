@@ -17,10 +17,11 @@ import { nextLocalStorage } from "@/lib/utils"
 import { Badge } from "@/components/ui/badge"
 import { ThemeBadge } from "@/components/theme-badge"
 
-
 export function Previous() {
     const [isOpen, setIsOpen] = React.useState(false)
-    const [recentNicknames, setRecentNicknames] = React.useState<localStorageData[]>([])
+    const [recentNicknames, setRecentNicknames] = React.useState<
+        localStorageData[]
+    >([])
 
     const wait = () => new Promise((resolve) => setTimeout(resolve, 100))
 
@@ -34,7 +35,7 @@ export function Previous() {
     const onOpen = () => {
         // Refresh the recent nicknames on open
         setRecentNicknames(
-            JSON.parse(nextLocalStorage()?.getItem("recentNicknames") || "[]"),
+            JSON.parse(nextLocalStorage()?.getItem("recentNicknames") || "[]")
         )
         setIsOpen(true)
     }
@@ -65,7 +66,11 @@ export function Previous() {
     )
 }
 
-const RecentNickname = ({ key, nicknameData, onClick}: {
+const RecentNickname = ({
+    key,
+    nicknameData,
+    onClick,
+}: {
     key: number
     nicknameData: localStorageData
     onClick: MouseEventHandler<HTMLButtonElement>
@@ -80,11 +85,7 @@ const RecentNickname = ({ key, nicknameData, onClick}: {
                     {pokemonName}
                 </Link>
             </Button>
-            {
-                nicknameData.theme && (
-                    <ThemeBadge theme={nicknameData.theme} />
-                )
-            }
+            {nicknameData.theme && <ThemeBadge theme={nicknameData.theme} />}
         </React.Fragment>
     )
 }

@@ -4,17 +4,15 @@ import { Button } from "@/components/ui/button"
 import React from "react"
 import Link from "next/link"
 import { Metadata } from "next"
-import { kv } from "@vercel/kv"
 import { PokemonMap } from "@/lib/pokemon"
 import { capitalize } from "@/lib/utils"
 
-
 export async function generateMetadata({
-                                           params,
-                                       }: {
+    params,
+}: {
     params: {
-        id: string;
-    };
+        id: string
+    }
 }): Promise<Metadata | undefined> {
     const data = await get_nicknames(params.id)
     if (!data) {
@@ -24,8 +22,11 @@ export async function generateMetadata({
     const pokemonName = PokemonMap.get(data.pokemon)?.name ?? "MissingNo"
     const theme = data.theme ? capitalize(data.theme) : undefined
 
-    const title = `Nicknames for ${pokemonName}` + (data.theme ? ` - Theme ${theme}` : "")
-    const description = `Generated Nicknames for the pokemon ${pokemonName}` + (data.theme ? ` with the theme ${theme}` : "")
+    const title =
+        `Nicknames for ${pokemonName}` + (data.theme ? ` - Theme ${theme}` : "")
+    const description =
+        `Generated Nicknames for the pokemon ${pokemonName}` +
+        (data.theme ? ` with the theme ${theme}` : "")
 
     return {
         title,
@@ -43,8 +44,9 @@ export async function generateMetadata({
     }
 }
 
-
-export default async function Result({ params, }: {
+export default async function Result({
+    params,
+}: {
     params: {
         id: string
     }

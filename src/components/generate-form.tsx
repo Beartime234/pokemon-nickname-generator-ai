@@ -30,7 +30,12 @@ import React, { useEffect } from "react"
 import { QuestionMarkCircledIcon, ReloadIcon } from "@radix-ui/react-icons"
 import { Loading } from "@/components/loading"
 import { Switch } from "@/components/ui/switch"
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
+import {
+    Tooltip,
+    TooltipContent,
+    TooltipProvider,
+    TooltipTrigger,
+} from "@/components/ui/tooltip"
 import { validMaxLengths } from "@/lib/actions/types"
 import { capitalize } from "@/lib/utils"
 
@@ -51,11 +56,10 @@ const FormSchema = z.object({
         required_error: "You must select a Pokemon",
     }),
     generationSixPlus: z.boolean().default(false),
-    theme: z.string().optional()
+    theme: z.string().optional(),
 })
 
-export function GenerateForm(
-) {
+export function GenerateForm() {
     const router = useRouter()
     const [isSubmitting, setIsSubmitting] = React.useState(false)
     const form = useForm<z.infer<typeof FormSchema>>({
@@ -65,7 +69,9 @@ export function GenerateForm(
     useEffect(() => {
         // Set the previous selected theme if it exists
         setTimeout(() => {
-            const previousSelectedTheme = localStorage.getItem("previousSelectedTheme")
+            const previousSelectedTheme = localStorage.getItem(
+                "previousSelectedTheme"
+            )
             if (previousSelectedTheme) {
                 form.setValue("theme", previousSelectedTheme)
             }
@@ -86,7 +92,11 @@ export function GenerateForm(
             if (data.generationSixPlus) {
                 maxLength = 12
             }
-            const id = await generate_nicknames(pokemon_no, maxLength, data.theme)
+            const id = await generate_nicknames(
+                pokemon_no,
+                maxLength,
+                data.theme
+            )
             router.push(`/nickname/${id}`)
         } catch (error) {
             toast({
@@ -121,9 +131,7 @@ export function GenerateForm(
                                         <SelectValue placeholder="Select a Pokemon" />
                                     </SelectTrigger>
                                 </FormControl>
-                                <SelectContent>
-                                    {PokemonOptions}
-                                </SelectContent>
+                                <SelectContent>{PokemonOptions}</SelectContent>
                             </Select>
                             <FormMessage />
                         </FormItem>
@@ -145,7 +153,10 @@ export function GenerateForm(
                                         <SelectValue placeholder="Select A Theme" />
                                     </SelectTrigger>
                                 </FormControl>
-                                <SelectContent position={"popper"} sideOffset={5}>
+                                <SelectContent
+                                    position={"popper"}
+                                    sideOffset={5}
+                                >
                                     <SelectItem value={"none"}>None</SelectItem>
                                     {ThemeOptions}
                                 </SelectContent>
@@ -159,19 +170,23 @@ export function GenerateForm(
                     control={form.control}
                     name="generationSixPlus"
                     render={({ field }) => (
-                        <FormItem
-                            className="space-x-1">
-                            <div className={"flex flex-row items-center space-x-1.5"}>
+                        <FormItem className="space-x-1">
+                            <div
+                                className={
+                                    "flex flex-row items-center space-x-1.5"
+                                }
+                            >
                                 <FormLabel>
                                     Generation {field.value ? "6+" : "1-5"}
                                 </FormLabel>
                                 <TooltipProvider>
-                                    <Tooltip delayDuration={100} >
+                                    <Tooltip delayDuration={100}>
                                         <TooltipTrigger asChild>
                                             <QuestionMarkCircledIcon />
                                         </TooltipTrigger>
                                         <TooltipContent>
-                                            Generation 1-5 has a max of 10 Characters where as 6+ allow 12.
+                                            Generation 1-5 has a max of 10
+                                            Characters where as 6+ allow 12.
                                         </TooltipContent>
                                     </Tooltip>
                                 </TooltipProvider>
@@ -202,8 +217,6 @@ export function GenerateForm(
                     {isSubmitting && <Loading />}
                 </div>
             </form>
-
         </Form>
     )
 }
-

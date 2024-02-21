@@ -12,7 +12,11 @@ interface generateNicknamesResponse {
 const recentNicknamesKey = "recentNicknames"
 const recentNicknamesMax = 10
 
-export async function generate_nicknames(pokemon_dex: number, maxLength: validMaxLengths, theme?: string) {
+export async function generate_nicknames(
+    pokemon_dex: number,
+    maxLength: validMaxLengths,
+    theme?: string
+) {
     const pokemonName = PokemonMap.get(pokemon_dex)?.name
 
     if (pokemonName === undefined) {

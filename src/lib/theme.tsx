@@ -14,4 +14,3 @@ export const ThemeMap = new Map<string, ThemeData>([
     ["botanical", { color: "green" }],
     ["coffee", { color: "brown" }],
 ])
-

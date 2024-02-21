@@ -30,6 +30,7 @@ export async function generate_nicknames(pokemon_dex: number, maxLength: validMa
 
     // Fetch from API
     const gid = nanoid()
+    const uniqueId = `${pokemonName.toLowerCase()}-${gid}`
     const response = await fetch(url)
     const data: generateNicknamesResponse = await response.json()
 
@@ -40,13 +41,13 @@ export async function generate_nicknames(pokemon_dex: number, maxLength: validMa
         theme,
         nicknames: data.nicknames,
     }
-    await save_nicknames(gid, kvData)
+    await save_nicknames(uniqueId, kvData)
 
     // Add to local storage
     const localStorageData: localStorageData = {
         pokemon: pokemon_dex,
         theme,
-        gid,
+        gid: uniqueId,
     }
     const recentNicknames = JSON.parse(
         localStorage.getItem(recentNicknamesKey) || "[]"
@@ -57,5 +58,5 @@ export async function generate_nicknames(pokemon_dex: number, maxLength: validMa
         recentNicknames.pop()
     }
     localStorage.setItem(recentNicknamesKey, JSON.stringify(recentNicknames))
-    return gid
+    return uniqueId
 }

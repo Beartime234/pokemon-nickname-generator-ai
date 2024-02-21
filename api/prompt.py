@@ -30,7 +30,8 @@ def create_assistant_prompt(theme: Optional[str]) -> str:
             logger.error(f"Theme {theme} not found in prompts dir.")
             return prompt
 
-        prompt += f"\n{theme_prompt}"
+        prompt += f"\n{theme_prompt}\n"
+        prompt = prompt.strip()
 
     print(prompt)
     return prompt

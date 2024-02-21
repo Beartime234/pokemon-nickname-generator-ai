@@ -17,12 +17,11 @@ export function ThemeBadge(props: ThemeBadgeProps) {
         ? ThemeMap.get(theme)?.color || "primary"
         : "primary"
 
-    // @ts-ignore
     return (
         <Badge
-            /*
-          // @ts-ignore */
             className="bg-[var(--badge)] text-white hover:bg-[var(--badge)]"
+            /*
+            // @ts-ignore */
             style={{ "--badge": themeColor }}
         >
             {capitalize(theme)}

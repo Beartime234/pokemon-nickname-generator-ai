@@ -21,7 +21,6 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select"
-import { toast } from "@/components/ui/use-toast"
 import { PokemonMap } from "@/lib/pokemon"
 import { ThemeMap } from "@/lib/theme"
 import { useRouter } from "next/navigation"
@@ -37,7 +36,7 @@ import {
     TooltipTrigger,
 } from "@/components/ui/tooltip"
 import { validMaxLengths } from "@/lib/actions/types"
-import { capitalize } from "@/lib/utils"
+import { capitalize, errorToast } from "@/lib/utils"
 
 const PokemonOptions = Array.from(PokemonMap.entries()).map(([id, pokemon]) => (
     <SelectItem key={pokemon.name} value={id.toString()}>
@@ -98,13 +97,8 @@ export function GenerateForm() {
                 data.theme
             )
             router.push(`/nickname/${id}`)
-        } catch (error) {
-            toast({
-                title: "Uh oh!",
-                description:
-                    "Could not generate nicknames. Please try again later.",
-                variant: "destructive",
-            })
+        } catch (error: any) {
+            errorToast(error.message)
             setIsSubmitting(false)
             throw error
         }

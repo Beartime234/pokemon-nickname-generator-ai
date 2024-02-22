@@ -36,6 +36,12 @@ export async function generate_nicknames(
     const gid = nanoid()
     const uniqueId = `${pokemonName.toLowerCase()}-${gid}`
     const response = await fetch(url)
+    if (!response.ok) {
+        if (response.status === 429) {
+            throw new Error("Limit exceeded, try again later")
+        }
+        throw new Error("Failed to generate nicknames")
+    }
     const data: generateNicknamesResponse = await response.json()
 
     // Add to KV

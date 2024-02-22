@@ -2,7 +2,7 @@
 
 import { CrossCircledIcon, ReloadIcon } from "@radix-ui/react-icons"
 
-import { capitalize, cn } from "@/lib/utils"
+import { capitalize, cn, errorToast } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import {
     Card,
@@ -21,6 +21,8 @@ import { Badge } from "@/components/ui/badge"
 import { validMaxLengths } from "@/lib/actions/types"
 import { ThemeMap } from "@/lib/theme"
 import { ThemeBadge } from "@/components/theme-badge"
+import { toast } from "@/components/ui/use-toast"
+import { an } from "@upstash/redis/zmscore-b6b93f14"
 
 type NicknameCardProps = {
     pokemon_no: number
@@ -44,8 +46,13 @@ export function NicknameCard({
 
     async function onRetry() {
         setIsTryingAgain(true)
-        const id = await generate_nicknames(pokemon_no, length, theme)
-        router.push("/nickname/" + id)
+        try {
+            const id = await generate_nicknames(pokemon_no, length, theme)
+            router.push("/nickname/" + id)
+        } catch (error: any) {
+            errorToast(error.message)
+            setIsTryingAgain(false)
+        }
     }
 
     const imageSrc = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon_no}.png`

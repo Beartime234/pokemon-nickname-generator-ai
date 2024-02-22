@@ -1,13 +1,14 @@
 import logging
 from typing import Annotated, Optional
 
-import redis.asyncio as redis
-from fastapi import FastAPI, Query, Depends
+from fastapi import FastAPI, Query
 from openai import OpenAI
 from pydantic import BaseModel
 from pydantic_settings import BaseSettings
-from fastapi_limiter import FastAPILimiter
-from fastapi_limiter.depends import RateLimiter
+from slowapi import Limiter, _rate_limit_exceeded_handler
+from slowapi.errors import RateLimitExceeded
+from slowapi.util import get_remote_address
+from starlette.requests import Request
 
 from .prompt import create_user_prompt, create_assistant_prompt
 
@@ -30,30 +31,20 @@ class OpenAiResponse(BaseModel):
 settings = Settings()
 client = OpenAI(api_key=settings.OPENAI_API_KEY)
 
+limiter = Limiter(key_func=get_remote_address)
 app = FastAPI(
     title="Pokemon Nickname Generator",
     description="Simple API that generates Pokemon nicknames using AI.",
     version="0.1.0",
 )
+app.state.limiter = limiter
+app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
 
-@app.on_event("startup")
-async def startup():
-    # Replace the redis connection name with rediss:// for SSL
-    redis_url = settings.KV_URL.replace("redis://", "rediss://")
-    print("Startup: Connecting to redis...")
-
-    # The redis connection is created here
-    redis_connection = redis.from_url(
-        url=redis_url,
-        encoding="utf-8",
-        decode_responses=True
-    )
-    await FastAPILimiter.init(redis_connection)
-
-
-@app.get("/api/generate", dependencies=[Depends(RateLimiter(times=5, minutes=1))])
+@app.get("/api/generate")
+@limiter.limit("5/minute")
 def generate_nickname(
+        request: Request,
         pokemon: Annotated[str, Query(max_length=12, min_length=3)],
         max_length: Annotated[int, Query(ge=10, le=20)] = 10,
         theme: Annotated[Optional[str], Query(max_length=12, min_length=3)] = None,

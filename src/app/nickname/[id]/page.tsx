@@ -23,9 +23,9 @@ export async function generateMetadata({
     const theme = data.theme ? capitalize(data.theme) : undefined
 
     const title =
-        `${pokemonName} Nicknames` + (data.theme ? ` - Theme ${theme}` : "")
+        `${pokemonName} AI Nicknames` + (data.theme ? ` - Theme ${theme}` : "")
     const description =
-        `Generated Nicknames for the pokemon ${pokemonName}` +
+        `AI Generated Nicknames for the pokemon ${pokemonName}` +
         (data.theme ? ` with the theme ${theme}` : "")
 
     return {

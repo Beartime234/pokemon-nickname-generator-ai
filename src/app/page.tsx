@@ -3,7 +3,7 @@ import { GenerateForm } from "@/components/generate-form"
 import { Metadata } from "next"
 
 export const metadata: Metadata = {
-    title: "Create a Pokemon Nickname",
+    title: "Pokemon Nickname AI",
 }
 export default function Home() {
     return (

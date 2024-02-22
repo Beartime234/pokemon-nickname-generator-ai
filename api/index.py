@@ -41,6 +41,7 @@ app = FastAPI(
 async def startup():
     # Replace the redis connection name with rediss:// for SSL
     redis_url = settings.KV_URL.replace("redis://", "rediss://")
+    print("Startup: Connecting to redis...")
 
     # The redis connection is created here
     redis_connection = redis.from_url(

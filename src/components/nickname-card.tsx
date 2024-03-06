@@ -2,7 +2,7 @@
 
 import { CrossCircledIcon, ReloadIcon } from "@radix-ui/react-icons"
 
-import { capitalize, cn, errorToast } from "@/lib/utils"
+import { formatTheme, cn, errorToast } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import {
     Card,

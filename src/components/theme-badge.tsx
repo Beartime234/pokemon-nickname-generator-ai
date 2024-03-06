@@ -4,7 +4,7 @@ import * as React from "react"
 
 import { Progress } from "@/components/ui/progress"
 import { Badge } from "@/components/ui/badge"
-import { capitalize } from "@/lib/utils"
+import { capitalize, formatTheme } from "@/lib/utils"
 import { ThemeMap } from "@/lib/theme"
 
 type ThemeBadgeProps = {
@@ -24,7 +24,7 @@ export function ThemeBadge(props: ThemeBadgeProps) {
             // @ts-ignore */
             style={{ "--badge": themeColor }}
         >
-            {capitalize(theme)}
+            {formatTheme(theme)}
         </Badge>
     )
 }

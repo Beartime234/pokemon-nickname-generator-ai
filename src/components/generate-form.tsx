@@ -36,7 +36,7 @@ import {
     TooltipTrigger,
 } from "@/components/ui/tooltip"
 import { validMaxLengths } from "@/lib/actions/types"
-import { capitalize, errorToast } from "@/lib/utils"
+import { errorToast, formatTheme } from "@/lib/utils"
 
 const PokemonOptions = Array.from(PokemonMap.entries()).map(([id, pokemon]) => (
     <SelectItem key={pokemon.name} value={id.toString()}>
@@ -46,7 +46,7 @@ const PokemonOptions = Array.from(PokemonMap.entries()).map(([id, pokemon]) => (
 
 const ThemeOptions = Array.from(ThemeMap.entries()).map(([name, data]) => (
     <SelectItem key={name} value={name}>
-        {capitalize(name)}
+        {formatTheme(name)}
     </SelectItem>
 ))
 

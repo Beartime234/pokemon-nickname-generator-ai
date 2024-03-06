@@ -1,0 +1,1 @@
+Use the theme Starbucks Misspellings for creating nicknames. Defined as the ridiculously misspelt names, e.g. "air-in" for "aaron", "miqal" for "michael", etc. Phonetically the nickname should sound similar to the original Pokemon name.

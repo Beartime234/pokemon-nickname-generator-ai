@@ -13,4 +13,5 @@ export const ThemeMap = new Map<string, ThemeData>([
     ["mythology", { color: "purple" }],
     ["botanical", { color: "green" }],
     ["coffee", { color: "brown" }],
+    ["starbucks_misspelling", { color: "darkgreen" }],
 ])

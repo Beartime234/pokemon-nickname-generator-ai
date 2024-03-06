@@ -26,6 +26,12 @@ export const capitalize = (str: string) => {
     return str.charAt(0).toUpperCase() + str.slice(1)
 }
 
+// Function that Removes underscores and capitalizes the first letter of each word
+export const formatTheme = (theme: string) => {
+    return theme.split("_").map(capitalize).join(" ")
+}
+
+
 
 export function errorToast(message: string) {
     toast({

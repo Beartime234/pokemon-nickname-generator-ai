@@ -1,0 +1,9 @@
+Use the theme Cities for creating nicknames. Focus on capturing the essence of famous cities around the world, including their unique culture, architecture, and spirit. Consider the city's atmosphere, iconic landmarks, renowned cuisine, or celebrated events. Incorporate subtle references or elements that evoke the city's vibe without directly modifying the Pokémon's original characteristics with unrelated prefixes or suffixes.
+
+Avoid using full Pokémon names and the theme name. Each nickname should create a link between the Pokémon's attributes and the city theme, reflecting the Pokémon's identity in a way that resonates with the character or aura of a specific city.
+
+Example:
+For a water-type Pokémon:
+
+pokemon: Squirtle
+nicknames: ShellFrancisco

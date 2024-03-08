@@ -1,9 +1,11 @@
 import logging
-import os
-from typing import Optional
+from pathlib import Path
+from typing import Optional, TypedDict
 
+# Define the logger
 logger = logging.getLogger(__name__)
 
+# Base prompt definition
 BASE_PROMPT = """
 You are an assistant designed to output JSON. You are given a Pokemon's name and the number of nicknames to create.
 You must give them in a form of the list with the key nicknames and the value being a list of strings.
@@ -13,27 +15,66 @@ Combine both the characteristics of the Pokemon and the theme to create a nickna
 """
 
 
+# TypedDict for structured prompt mapping
+class PromptMap(TypedDict):
+    file: str  # The file name of the prompt without the .txt extension
+    temperature: float  # The temperature to use for the prompt
+
+
+# Prompt map configuration
+PROMPT_MAP: dict[str, PromptMap] = {
+    "botanical": {"file": "botanical", "temperature": 1.2},
+    "coffee": {"file": "coffee", "temperature": 1.2},
+    "cool": {"file": "cool", "temperature": 1.2},
+    "cute": {"file": "cute", "temperature": 1.2},
+    "mythology": {"file": "mythology", "temperature": 1.2},
+    "starbucks_misspelling": {"file": "starbucks_misspelling", "temperature": 1.5},
+    "strong": {"file": "strong", "temperature": 1.2},
+    "color": {"file": "color", "temperature": 1.2},
+    "stylish": {"file": "stylish", "temperature": 1.2},
+    "majestic": {"file": "majestic", "temperature": 1.2},
+    "quirky": {"file": "quirky", "temperature": 1.5},
+    "astrology": {"file": "astrology", "temperature": 1.5},
+    "cities": {"file": "cities", "temperature": 1.0},
+    "wild_west": {"file": "wild_west", "temperature": 1.2},
+}
+
+
+# Function to read a theme prompt from a file
+def read_theme_prompt(theme: str) -> Optional[str]:
+    try:
+        # Resolve the theme prompt file path
+        theme_prompt_filename = PROMPT_MAP[theme]["file"]
+        theme_prompt_path = Path(__file__).parent / "prompts" / f"{theme_prompt_filename}.txt"
+
+        # Log the resolved path
+        logger.info(f"Prompt path: {theme_prompt_path}")
+
+        # Read and return the theme prompt content
+        return theme_prompt_path.read_text()
+    except KeyError:
+        logger.error(f"Theme {theme} not found in prompt map.")
+    except FileNotFoundError:
+        logger.error(f"Theme prompt file {theme_prompt_filename}.txt not found in prompts directory.")
+    return None
+
+
+def get_theme_temperature(theme: str) -> float:
+    try:
+        return PROMPT_MAP[theme]["temperature"]
+    except KeyError:
+        logger.error(f"Theme {theme} not found in prompt map.")
+    return 1.2
+
+
 def create_assistant_prompt(theme: Optional[str]) -> str:
-    prompt = BASE_PROMPT
+    prompt = BASE_PROMPT.strip()
+
     if theme:
-        # Read the theme prompt from the prompts directory
-        # the prompt will be a text file with the name of the theme
+        theme_prompt = read_theme_prompt(theme)
+        if theme_prompt:  # If the theme prompt was read successfully
+            prompt += f"\n{theme_prompt}\n"
 
-        # Get this directory
-        this_dir = os.path.dirname(__file__)
-        try:
-            theme_prompt_path = f"{this_dir}/prompts/{theme}.txt"
-            logger.info(f"Prompt path: {theme_prompt_path}")
-            with open(theme_prompt_path, "r") as file:
-                theme_prompt = file.read()
-        except FileNotFoundError:
-            logger.error(f"Theme {theme} not found in prompts dir.")
-            return prompt
-
-        prompt += f"\n{theme_prompt}\n"
-        prompt = prompt.strip()
-
-    print(prompt)
     return prompt
 
 

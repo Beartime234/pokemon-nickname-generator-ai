@@ -10,7 +10,7 @@ from slowapi.errors import RateLimitExceeded
 from slowapi.util import get_remote_address
 from starlette.requests import Request
 
-from .prompt import create_user_prompt, create_assistant_prompt
+from .prompt import create_user_prompt, create_assistant_prompt, get_theme_temperature
 
 logger = logging.getLogger(__name__)
 
@@ -51,14 +51,16 @@ def generate_nickname(
         amount: Annotated[int, Query(ge=1, le=5)] = 5
 ):
     assistant_prompt = create_assistant_prompt(theme)
+    temperature = 1.2 if theme is None else get_theme_temperature(theme)
     user_prompt = create_user_prompt(pokemon, amount, max_length)
     logger.info(
-        f"Assistant prompt: {assistant_prompt}\nUser prompt: {user_prompt}"
+        f"Assistant prompt: {assistant_prompt}\nUser prompt: {user_prompt}\nTemperature: {temperature}"
     )
+    print(assistant_prompt)
     open_ai_response = client.chat.completions.create(
-        model="gpt-3.5-turbo-0125",
+        model="gpt-4-0125-preview",
         response_format={"type": "json_object"},
-        temperature=1.2,
+        temperature=temperature,
         messages=[
             {"role": "assistant", "content": assistant_prompt},
             {"role": "user", "content": user_prompt}

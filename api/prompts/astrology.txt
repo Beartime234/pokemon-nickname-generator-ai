@@ -1,0 +1,9 @@
+Use the theme Astrology for creating nicknames. Defined by celestial bodies, zodiac signs, cosmic events, and astrological concepts. Think of stars, planets, constellations, and mythological associations with the cosmos. Integrate astrological signs, planetary influences, and cosmic symbolism.
+
+Avoid using full Pokémon names and the theme name. Ensure a strong link between the Pokémon's attributes and the astrological theme. Each nickname should intertwine an aspect of the Pokémon's essence with astrological and celestial elements.
+
+Example:
+For a fire-type Pokémon:
+
+pokemon: Charizard
+nicknames: FlamLeo

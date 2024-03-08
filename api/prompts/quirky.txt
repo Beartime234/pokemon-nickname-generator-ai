@@ -1,0 +1,9 @@
+Use the theme Quirky for creating nicknames. Defined by unique, unconventional, or eccentric characteristics. Think of unusual patterns, odd shapes, vibrant color combinations, or anything that deviates from the norm. Incorporate puns, play on words, and unexpected suffixes.
+
+Avoid using full Pokémon names and the theme name. Ensure a strong link between the Pokémon's attributes and the theme. Each nickname should capture an aspect of both the Pokémon's nature and the quirky essence.
+
+Example:
+For a psychic-type Pokémon:
+
+pokemon: Alakazam
+nicknames: SpoonTwist

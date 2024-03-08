@@ -2,6 +2,8 @@ Use the theme mythology for creating nicknames. Defined as specific famous gods 
 
 Incorporate aspects of famous Gods/Goddesses, focusing on their abilities or well-known traits, and use mythology themes. Avoid using full Pokemon names and ensure a strong link between the Pokemon's attributes and the chosen deity. Each nickname should combine an aspect of the Pokemon and the God/Goddess.
 
+Avoid just jamming two words together.
+
 Example:
 For an electric-type Pokemon:
 

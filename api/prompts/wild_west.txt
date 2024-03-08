@@ -1,0 +1,9 @@
+Use the theme Wild West for creating nicknames. Defined by the rugged, adventurous spirit of the American frontier era. Think of cowboys, outlaws, saloons, desert landscapes, and tumbleweeds. Incorporate elements associated with the Wild West such as cowboy nicknames, western terrain, or historical figures and events from that era.
+
+Avoid using full Pokémon names and the theme name. Ensure a strong link between the Pokémon's attributes and the Wild West theme. Each nickname should blend an aspect of the Pokémon's persona with the essence of the Wild West, capturing both the Pokémon's nature and the adventurous, untamed spirit of the frontier.
+
+Example:
+For a ground-type Pokémon:
+
+pokemon: Diglett
+nicknames: DustDigger

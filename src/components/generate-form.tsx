@@ -77,7 +77,10 @@ export function GenerateForm() {
                 maxLength,
                 data.theme
             )
-            router.push(`/nickname/${id}`)
+            localStorage.setItem("fireworks", "true")
+            router.push(
+                `/nickname/${id}`
+            )
         } catch (error: any) {
             errorToast(error.message)
             setIsSubmitting(false)

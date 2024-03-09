@@ -2,7 +2,7 @@
 
 import { CrossCircledIcon, ReloadIcon } from "@radix-ui/react-icons"
 
-import { cn, errorToast } from "@/lib/utils"
+import { cn, errorToast, nextLocalStorage } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import Image from "next/image"
@@ -13,6 +13,9 @@ import React from "react"
 import { PokemonMap } from "@/lib/pokemon"
 import { validMaxLengths } from "@/lib/actions/types"
 import { ThemeBadge } from "@/components/theme-badge"
+import { useSearchParams} from "next/navigation"
+import Fireworks from "react-canvas-confetti/dist/presets/fireworks";
+
 
 type NicknameCardProps = {
     pokemon_no: number
@@ -33,6 +36,13 @@ export function NicknameCard({
 
     const [isTryingAgain, setIsTryingAgain] = React.useState(false)
     const pokemonName = PokemonMap.get(pokemon_no)?.name ?? "MissingNo"
+    const shouldShowFireworks = nextLocalStorage()?.getItem("fireworks") === "true"
+
+    if (shouldShowFireworks) {
+        setTimeout(() => {
+            localStorage.setItem("fireworks", "false")
+        }, 5000)
+    }
 
     async function onRetry() {
         setIsTryingAgain(true)
@@ -55,6 +65,10 @@ export function NicknameCard({
             )}
             {...props}
         >
+            {
+                shouldShowFireworks &&
+                <Fireworks autorun={{ duration: 700, speed: 2 }}/>
+            }
             <CardHeader className={"sm:pb-1"}>
                 <CardTitle>
                     {pokemonName}

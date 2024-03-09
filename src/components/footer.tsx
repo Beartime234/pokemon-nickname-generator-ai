@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/dialog"
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card"
 
-export default function Footer() {
+export const Footer = () => {
     return (
         <footer className="fixed bottom-0 left-0 z-10 w-full p-2 bg-white border-t border-gray-200 shadow md:flex md:items-center md:justify-between md:p-4 dark:bg-gray-800 dark:border-gray-600 hidden md:block">
             <span className="text-sm sm:text-center">

@@ -1,6 +1,7 @@
 import { get_nicknames } from "@/lib/actions/server"
 import { NicknameCard } from "@/components/nickname-card"
 import { Button } from "@/components/ui/button"
+import { CopyLinkButton } from "@/components/copy-link"
 import React from "react"
 import Link from "next/link"
 import { Metadata } from "next"
@@ -72,7 +73,10 @@ export default async function Result({
                     theme={data.theme}
                 />
             </div>
-            <div className="pb-1 md:pb-3">
+            <div className="pb-1 md:pb-3 space-x-1">
+                <CopyLinkButton
+                    id={params.id}
+                />
                 <Button variant={"outline"} asChild>
                     <Link href="/">Create New</Link>
                 </Button>

@@ -1,0 +1,9 @@
+Use the theme Music for creating nicknames. Defined by genres, instruments, legendary musicians, and iconic songs that have shaped the musical landscape. Think of the rhythm, melody, and harmony that characterize the diverse world of music. Incorporate musical terms, instrument names, famous artist monikers, or song titles that resonate with the Pokémon's characteristics or abilities.
+
+Avoid using full Pokémon names and the theme name. Ensure a strong link between the Pokémon's attributes and the thematic elements of music. Each nickname should blend an aspect of the Pokémon's essence with the vibrancy, emotion, or style found in music.
+
+Example:
+For a sound-based Pokémon:
+
+pokemon: Noivern
+nicknames: EchoChord, Crescendo, Rhapsody, Tempo

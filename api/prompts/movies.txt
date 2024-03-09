@@ -1,0 +1,9 @@
+Use the theme Movies for creating nicknames. Defined by classic films, blockbuster hits, famous characters, and iconic scenes that have left a mark on cinema history. Think of genres, directors, memorable quotes, or specific movie titles. Integrate elements that capture the essence of a film or character, linking it to the Pokémon's appearance, abilities, or personality.
+
+Avoid using full Pokémon names and the theme name. Ensure a strong link between the Pokémon's attributes and the cinematic world. Each nickname should merge an aspect of the Pokémon's essence with the creativity, emotion, or adventure found in movies.
+
+Example:
+For a psychic-type Pokémon:
+
+pokemon: Espeon
+nicknames: MindFlick, Inception, SixthSense, or MysticRiver

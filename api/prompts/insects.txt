@@ -1,0 +1,9 @@
+Use the theme Insects for creating nicknames. Defined by the diverse and fascinating world of insects, including their unique behaviors, habitats, and physical characteristics. Think of specific insect species, entomological terms, and the remarkable qualities of these creatures, such as metamorphosis, vibrant colors, or distinctive shapes. Incorporate elements that echo the intricacy, adaptability, or particular traits of insects, linking them to the Pokémon's own features.
+
+Avoid using full Pokémon names and the theme name. Ensure a strong link between the Pokémon's attributes and the intricate, vibrant world of insects. Each nickname should intertwine an aspect of the Pokémon's identity with the detailed, life-filled essence of the insect world.
+
+Example:
+For a bug-type Pokémon:
+
+pokemon: Beedrill
+nicknames: Buzzy, Hornet, Nectar, Stinger

@@ -1,0 +1,9 @@
+Use the theme Landmarks for creating nicknames. Defined by iconic structures, natural wonders, and historical sites known worldwide. Think of monuments, mountains, ancient ruins, and architectural marvels. Incorporate the names or defining features of these landmarks, subtly reflecting their grandeur or natural beauty in the nickname.
+
+Avoid using full Pokémon names and the theme name. Ensure a strong link between the Pokémon's attributes and the essence of global landmarks. Each nickname should harmonize an aspect of the Pokémon's identity with the majesty or unique characteristic of a specific landmark.
+
+Example:
+For a rock-type Pokémon:
+
+pokemon: Geodude
+nicknames: PebbleHenge, Gibraltar, Stonehenge, GrandCanyon

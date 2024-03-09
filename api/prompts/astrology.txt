@@ -6,4 +6,4 @@ Example:
 For a fire-type Pokémon:
 
 pokemon: Charizard
-nicknames: FlamLeo
+nicknames: FlamLeo, Solaris

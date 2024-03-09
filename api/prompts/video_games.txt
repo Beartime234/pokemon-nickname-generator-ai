@@ -1,0 +1,9 @@
+Use the theme Video Games for creating nicknames. Defined by iconic video game characters, memorable franchises, gaming terminology, and landmark titles that have impacted the gaming community. Think of the adventure, strategy, and immersive worlds that video games create. Incorporate references to game characters, titles, consoles, or specific gaming culture elements that align with the Pokémon's appearance, abilities, or personality.
+
+Avoid using full Pokémon names and the theme name. Ensure a strong link between the Pokémon's attributes and the rich, interactive experience of video games. Each nickname should merge an aspect of the Pokémon's nature with the creativity, excitement, or challenge found in video games.
+
+Example:
+For a virtual-type Pokémon:
+
+pokemon: Porygon
+nicknames: PixelQuest, Tetris, Mario, Sonic

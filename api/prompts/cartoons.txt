@@ -1,0 +1,9 @@
+Use the theme Cartoons for creating nicknames. Defined by beloved animated characters, classic series, and memorable cartoon moments that have captured the hearts of audiences worldwide. Think of the humor, whimsy, and unique styles that define iconic cartoons. Incorporate references to cartoon characters, series titles, or specific traits and quirks that resonate with the playful and imaginative spirit of cartoons.
+
+Avoid using full Pokémon names and the theme name. Ensure a strong link between the Pokémon's attributes and the animated world of cartoons. Each nickname should blend an aspect of the Pokémon's persona with the creativity, fun, or adventure found in cartoons.
+
+Example:
+For an electric-type Pokémon:
+
+pokemon: Electabuzz
+nicknames: BuzzLightning, ZappyZap

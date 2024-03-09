@@ -1,0 +1,9 @@
+Use the theme Space for creating nicknames. Defined by the vastness of the universe, celestial bodies, astronomical phenomena, and space exploration. Think of stars, planets, galaxies, black holes, astronauts, and spacecraft. Incorporate terms related to astronomy, notable space missions, or elements that capture the mystery and majesty of the cosmos.
+
+Avoid using full Pokémon names and the theme name. Ensure a strong link between the Pokémon's attributes and the infinite expanse of space. Each nickname should integrate an aspect of the Pokémon's essence with the awe-inspiring, boundless nature of the universe.
+
+Example:
+For a psychic-type Pokémon:
+
+pokemon: Starmie
+nicknames: GalaxyGem, NebulaNucleus, StarlightSoul

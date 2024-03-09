@@ -1,0 +1,9 @@
+Use the theme Cats for creating nicknames. Defined by the elegance, agility, and mysterious nature of felines, encompassing domestic cats and wild big cats alike. Think of specific cat breeds, feline behaviors, the stealth and grace of big cats, or the playful and affectionate nature of house cats. Incorporate elements that reflect the cat-like qualities of independence, curiosity, or predatory skill, mirroring these traits in the Pokémon's own demeanor.
+
+Avoid using full Pokémon names and the theme name. Ensure a strong link between the Pokémon's attributes and the sleek, enigmatic world of cats. Each nickname should harmonize an aspect of the Pokémon's personality or appearance with the characteristic features or spirit of cats.
+
+Example:
+For a dark-type Pokémon:
+
+pokemon: Bulbasaur
+nicknames: Whisker, Panthera, Prowl

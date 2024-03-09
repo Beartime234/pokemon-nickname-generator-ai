@@ -1,0 +1,9 @@
+Use the theme Royalty for creating nicknames. Defined by the elegance, power, and heritage associated with kings, queens, princes, and princesses. Think of crowns, castles, royal titles, and historic reigns. Incorporate elements that reflect the majesty, dignity, and noble characteristics of royalty, along with names or titles that evoke a sense of regal bearing and aristocratic lineage.
+
+Avoid using full Pokémon names and the theme name. Ensure a strong link between the Pokémon's attributes and the grandeur of royalty. Each nickname should harmonize an aspect of the Pokémon's identity with the opulence, leadership, or ceremonial splendor found in royal traditions.
+
+Example:
+For a dragon-type Pokémon:
+
+pokemon: Dragonair
+nicknames: RegalSerpent, ImperialDrake, SovereignWyrm

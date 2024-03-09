@@ -37,6 +37,20 @@ PROMPT_MAP: dict[str, PromptMap] = {
     "astrology": {"file": "astrology", "temperature": 1.5},
     "cities": {"file": "cities", "temperature": 1.0},
     "wild_west": {"file": "wild_west", "temperature": 1.2},
+    "fantasy": {"file": "fantasy", "temperature": 1.2},
+    "food": {"file": "food", "temperature": 1.2},
+    "landmarks": {"file": "landmarks", "temperature": 1.2},
+    "movies": {"file": "movies", "temperature": 1.2},
+    "sports": {"file": "sports", "temperature": 1.2},
+    "cartoons": {"file": "cartoons", "temperature": 1.2},
+    "royalty": {"file": "royalty", "temperature": 1.2},
+    "music": {"file": "music", "temperature": 1.2},
+    "video_games": {"file": "video_games", "temperature": 1.2},
+    "space": {"file": "space", "temperature": 1.2},
+    "pirates": {"file": "pirates", "temperature": 1.2},
+    "dinosaurs": {"file": "dinosaurs", "temperature": 1.2},
+    "insects": {"file": "insects", "temperature": 1.2},
+    "cats": {"file": "cats", "temperature": 1.2},
 }
 
 

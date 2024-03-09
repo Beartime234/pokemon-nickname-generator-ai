@@ -6,4 +6,4 @@ Example:
 For a psychic-type Pokémon:
 
 pokemon: Alakazam
-nicknames: SpoonTwist
+nicknames: SpoonTwist, MindBend, PsycheOut

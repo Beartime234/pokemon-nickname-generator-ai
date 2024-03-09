@@ -6,4 +6,4 @@ Example:
 For a water-type Pokémon:
 
 Pokémon: Vaporeon
-Nicknames: Vaporglam, AquaChic
+Nicknames: Vaporglam, AquaChic, EonElegance

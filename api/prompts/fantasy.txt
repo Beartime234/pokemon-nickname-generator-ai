@@ -1,0 +1,9 @@
+Use the theme Fantasy for creating nicknames. Defined by elements from fantasy literature, mythology, and folklore. Think of magical creatures, mythical heroes, enchanted forests, and ancient spells. Incorporate names and concepts from fantasy worlds, legendary artifacts, or mythical beings that capture the imagination.
+
+Avoid using full Pokémon names and the theme name. Ensure a strong link between the Pokémon's attributes and the fantasy theme. Each nickname should weave together an aspect of the Pokémon's character with the magical and mystical elements of fantasy lore.
+
+Example:
+For a dragon-type Pokémon:
+
+pokemon: Dragonite
+nicknames: Wyrmlore, Smaug

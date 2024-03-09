@@ -6,4 +6,4 @@ Example:
 For a water-type Pokémon:
 
 pokemon: Squirtle
-nicknames: ShellFrancisco
+nicknames: ShellFrancisco,  Parispod

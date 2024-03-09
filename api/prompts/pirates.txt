@@ -1,0 +1,9 @@
+Use the theme Pirates for creating nicknames. Defined by the adventurous, rebellious spirit of seafaring outlaws, treasure hunts, and legendary pirate lore. Think of ships, the open sea, treasure maps, nautical terms, and famous pirates from history and fiction. Incorporate elements that evoke the thrill of piracy, such as pirate slang, ship names, or iconic symbols like the Jolly Roger.
+
+Avoid using full Pokémon names and the theme name. Ensure a strong link between the Pokémon's attributes and the daring, adventurous world of pirates. Each nickname should blend an aspect of the Pokémon's character with the freedom, cunning, or treasure-seeking essence of pirate life.
+
+Example:
+For a water-type Pokémon:
+
+pokemon: Tentacool
+nicknames: KrakenBane, DavyJones, Blackbeard, CaptainHook, SeaDog

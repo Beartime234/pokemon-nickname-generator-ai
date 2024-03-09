@@ -8,5 +8,4 @@ Each nickname should embody the essence of the Pokémon through the lens of colo
 Example:
 For a fire-type Pokémon:
 Pokémon: Charmander
-Nicknames: BlazeRuby
-This nickname combines the fiery aspect of Charmander with the rich, red hue suggested by "Ruby," reflecting both the Pokémon's type and the theme of color.
+Nicknames: BlazeRuby, Crimson

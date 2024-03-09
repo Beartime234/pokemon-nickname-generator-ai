@@ -6,4 +6,4 @@ Example:
 For an electric-type Pokemon:
 
 pokemon: Jolteon
-nicknames: Sunjolt
+nicknames: Sunjolt, Zapblossom

@@ -1,0 +1,9 @@
+Use the theme Sports for creating nicknames. Defined by various athletic disciplines, famous athletes, sports terms, and iconic events. Think of the energy, strategy, and physical prowess associated with sports like basketball, soccer, tennis, or swimming. Incorporate sports-related jargon, athlete nicknames, or elements that reflect the competitive spirit and dynamism of sports.
+
+Avoid using full Pokémon names and the theme name. Ensure a strong link between the Pokémon's attributes and the world of sports. Each nickname should encapsulate an aspect of the Pokémon's characteristics with the vigor, agility, or teamwork found in sports.
+
+Example:
+For a fighting-type Pokémon:
+
+pokemon: Machamp
+nicknames: ChampPunch, Boxer, JudoMaster

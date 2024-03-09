@@ -2,27 +2,17 @@
 
 import { CrossCircledIcon, ReloadIcon } from "@radix-ui/react-icons"
 
-import { formatTheme, cn, errorToast } from "@/lib/utils"
+import { cn, errorToast } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
-import {
-    Card,
-    CardContent,
-    CardFooter,
-    CardHeader,
-    CardTitle,
-} from "@/components/ui/card"
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import Image from "next/image"
 import { Separator } from "@/components/ui/separator"
 import { generate_nicknames } from "@/lib/actions/client"
 import { useRouter } from "next/navigation"
 import React from "react"
 import { PokemonMap } from "@/lib/pokemon"
-import { Badge } from "@/components/ui/badge"
 import { validMaxLengths } from "@/lib/actions/types"
-import { ThemeMap } from "@/lib/theme"
 import { ThemeBadge } from "@/components/theme-badge"
-import { toast } from "@/components/ui/use-toast"
-import { an } from "@upstash/redis/zmscore-b6b93f14"
 
 type NicknameCardProps = {
     pokemon_no: number

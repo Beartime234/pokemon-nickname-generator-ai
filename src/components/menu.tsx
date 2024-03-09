@@ -1,18 +1,12 @@
 "use client"
 
 import * as React from "react"
-import Link from "next/link"
 
-import {
-    NavigationMenu,
-    NavigationMenuItem,
-    NavigationMenuLink,
-    NavigationMenuList,
-    navigationMenuTriggerStyle,
-} from "@/components/ui/navigation-menu"
+import { NavigationMenu, NavigationMenuItem, NavigationMenuList } from "@/components/ui/navigation-menu"
 import { ModeToggle } from "@/components/mode-toggle"
 import { Previous } from "@/components/previous"
 import Image from "next/image"
+
 export function Menu() {
     return (
         <NavigationMenu>

@@ -1,7 +1,6 @@
 "use client"
 
 import React from "react"
-import Image from "next/image"
 
 // No prop is used in the component; however, kept BodyProps for future scalability.
 type HeaderProps = {}

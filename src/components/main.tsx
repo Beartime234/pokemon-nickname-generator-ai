@@ -2,8 +2,6 @@
 
 import React from "react"
 import { GenerateForm } from "@/components/generate-form"
-import { NicknameCard } from "@/components/nickname-card"
-import { Button } from "@/components/ui/button"
 
 // No prop is used in the component; however, kept BodyProps for future scalability.
 type MainProps = {

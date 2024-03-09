@@ -1,10 +1,8 @@
 "use client"
 
 import * as React from "react"
-
-import { Progress } from "@/components/ui/progress"
 import { Badge } from "@/components/ui/badge"
-import { capitalize, formatTheme } from "@/lib/utils"
+import { formatTheme } from "@/lib/utils"
 import { ThemeMap } from "@/lib/theme"
 
 type ThemeBadgeProps = {

@@ -5,22 +5,8 @@ import { useForm } from "react-hook-form"
 import { z } from "zod"
 
 import { Button } from "@/components/ui/button"
-import {
-    Form,
-    FormControl,
-    FormDescription,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage,
-} from "@/components/ui/form"
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from "@/components/ui/select"
+import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { PokemonMap } from "@/lib/pokemon"
 import { ThemeMap } from "@/lib/theme"
 import { useRouter } from "next/navigation"
@@ -29,12 +15,7 @@ import React, { useEffect } from "react"
 import { QuestionMarkCircledIcon, ReloadIcon } from "@radix-ui/react-icons"
 import { Loading } from "@/components/loading"
 import { Switch } from "@/components/ui/switch"
-import {
-    Tooltip,
-    TooltipContent,
-    TooltipProvider,
-    TooltipTrigger,
-} from "@/components/ui/tooltip"
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 import { validMaxLengths } from "@/lib/actions/types"
 import { errorToast, formatTheme } from "@/lib/utils"
 

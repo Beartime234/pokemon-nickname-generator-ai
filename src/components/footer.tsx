@@ -3,17 +3,11 @@ import {
     Dialog,
     DialogContent,
     DialogDescription,
-    DialogFooter,
     DialogHeader,
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog"
-import { Button } from "@/components/ui/button"
-import {
-    HoverCard,
-    HoverCardContent,
-    HoverCardTrigger,
-} from "@/components/ui/hover-card"
+import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card"
 
 export default function Footer() {
     return (

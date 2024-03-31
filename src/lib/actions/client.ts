@@ -34,9 +34,9 @@ export async function generate_nicknames(
 
     // Fetch from API
     const gid = nanoid()
-    // Remove all non-alphanumeric characters from the Pokemon name
-    const cleanPokemonName = pokemonName.replace(/[^a-zA-Z0-9]/g, "")
-    const uniqueId = `${cleanPokemonName.toLowerCase()}-${gid}`
+    //  Clean up Pokemon name - First go to lowercase then remove all non a-z characters
+    const cleanPokemonName = pokemonName.toLowerCase().replace(/[^a-z]/g, "")
+    const uniqueId = `${cleanPokemonName}-${gid}`
     const response = await fetch(url)
     if (!response.ok) {
         if (response.status === 429) {

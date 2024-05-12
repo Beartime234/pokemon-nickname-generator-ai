@@ -58,7 +58,7 @@ def generate_nickname(
     )
     print(assistant_prompt)
     open_ai_response = client.chat.completions.create(
-        model="gpt-4-0125-preview",
+        model="gpt-4-turbo",
         response_format={"type": "json_object"},
         temperature=temperature,
         messages=[

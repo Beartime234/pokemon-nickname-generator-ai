@@ -100,7 +100,7 @@ export function NicknameCard({
                     </Button>
                 ) : (
                     <Button
-                        variant="destructive"
+                        variant="outline"
                         className="w-full"
                         onClick={onRetry}
                     >
@@ -122,7 +122,7 @@ const NicknamesList = ({
     start: number
     end: number
 }) => (
-    <div className="flex h-5 items-center space-x-3 text-sm font-semibold justify-center lg:text-2xl md:text-xl">
+    <div className="flex h-5 items-center space-x-3 text-sm font-semibold justify-center text-primary lg:text-2xl md:text-xl">
         {nicknames?.slice(start, end).map((nickname, index, slice) => (
             <React.Fragment key={index}>
                 <div>{nickname}</div>

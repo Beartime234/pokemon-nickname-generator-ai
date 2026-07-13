@@ -11,7 +11,7 @@ import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/h
 
 export const Footer = () => {
     return (
-        <footer className="fixed bottom-0 left-0 z-10 w-full p-2 bg-white border-t border-gray-200 shadow md:flex md:items-center md:justify-between md:p-4 dark:bg-gray-800 dark:border-gray-600 hidden md:block">
+        <footer className="fixed bottom-0 left-0 z-10 w-full p-2 bg-card border-t border-border md:flex md:items-center md:justify-between md:p-4 hidden">
             <span className="text-sm sm:text-center">
                 Made with ❤️ by{" "}
                 <a href="https://josheaton.co.nz" className="hover:underline">

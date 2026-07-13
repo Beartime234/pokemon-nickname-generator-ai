@@ -1,67 +1,70 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+/* Pokéball-red brand palette. Neutrals carry a whisper of the brand hue
+   (warm red) instead of stock slate; dark mode is a brand-tinted near-black
+   with elevation from lightness, not shadows. */
 @layer base {
     :root {
-        --background: 0 0% 100%;
-        --foreground: 222.2 84% 4.9%;
+        --background: 20 30% 99%;
+        --foreground: 358 45% 10%;
 
         --card: 0 0% 100%;
-        --card-foreground: 222.2 84% 4.9%;
+        --card-foreground: 358 45% 10%;
 
         --popover: 0 0% 100%;
-        --popover-foreground: 222.2 84% 4.9%;
+        --popover-foreground: 358 45% 10%;
 
-        --primary: 222.2 47.4% 11.2%;
-        --primary-foreground: 210 40% 98%;
+        --primary: 358 72% 46%;
+        --primary-foreground: 0 0% 100%;
 
-        --secondary: 210 40% 96.1%;
-        --secondary-foreground: 222.2 47.4% 11.2%;
+        --secondary: 358 40% 95%;
+        --secondary-foreground: 358 50% 24%;
 
-        --muted: 210 40% 96.1%;
-        --muted-foreground: 215.4 16.3% 46.9%;
+        --muted: 20 25% 95%;
+        --muted-foreground: 358 10% 40%;
 
-        --accent: 210 40% 96.1%;
-        --accent-foreground: 222.2 47.4% 11.2%;
+        --accent: 358 45% 94%;
+        --accent-foreground: 358 55% 22%;
 
-        --destructive: 0 84.2% 60.2%;
-        --destructive-foreground: 210 40% 98%;
+        --destructive: 0 84% 40%;
+        --destructive-foreground: 0 0% 100%;
 
-        --border: 214.3 31.8% 91.4%;
-        --input: 214.3 31.8% 91.4%;
-        --ring: 222.2 84% 4.9%;
+        --border: 20 20% 89%;
+        --input: 20 20% 84%;
+        --ring: 358 72% 46%;
 
         --radius: 0.5rem;
     }
 
     .dark {
-        --background: 255 90% 1%;
-        --foreground: 210 40% 98%;
+        --background: 355 25% 7%;
+        --foreground: 10 20% 96%;
 
-        --card: 222.2 84% 4.9%;
-        --card-foreground: 210 40% 98%;
+        --card: 355 22% 10%;
+        --card-foreground: 10 20% 96%;
 
-        --popover: 222.2 84% 4.9%;
-        --popover-foreground: 210 40% 98%;
+        --popover: 355 22% 10%;
+        --popover-foreground: 10 20% 96%;
 
-        --primary: 210 40% 98%;
-        --primary-foreground: 222.2 47.4% 11.2%;
+        --primary: 358 75% 52%;
+        --primary-foreground: 0 0% 100%;
 
-        --secondary: 217.2 32.6% 17.5%;
-        --secondary-foreground: 210 40% 98%;
+        --secondary: 355 20% 16%;
+        --secondary-foreground: 10 20% 92%;
 
-        --muted: 217.2 32.6% 17.5%;
-        --muted-foreground: 215 20.2% 65.1%;
+        --muted: 355 18% 15%;
+        --muted-foreground: 355 10% 70%;
 
-        --accent: 217.2 32.6% 17.5%;
-        --accent-foreground: 210 40% 98%;
+        --accent: 355 30% 17%;
+        --accent-foreground: 10 20% 96%;
 
-        --destructive: 0 62.8% 30.6%;
-        --destructive-foreground: 210 40% 98%;
+        --destructive: 0 70% 45%;
+        --destructive-foreground: 0 0% 100%;
 
-        --border: 217.2 32.6% 17.5%;
-        --input: 217.2 32.6% 17.5%;
-        --ring: 212.7 26.8% 83.9%;
+        --border: 355 18% 17%;
+        --input: 355 18% 20%;
+        --ring: 358 75% 52%;
     }
 }
 

@@ -1,13 +1,14 @@
 "use client"
 
 import { nanoid } from "../utils"
-import { kvData, localStorageData, validMaxLengths } from "@/lib/actions/types"
+import {
+    generateNicknamesResponse,
+    kvData,
+    localStorageData,
+    validMaxLengths,
+} from "@/lib/actions/types"
 import { save_nicknames } from "@/lib/actions/server"
 import { PokemonMap } from "@/lib/pokemon"
-
-interface generateNicknamesResponse {
-    nicknames: string[]
-}
 
 const recentNicknamesKey = "recentNicknames"
 const recentNicknamesMax = 10

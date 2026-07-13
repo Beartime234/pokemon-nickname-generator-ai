@@ -8,6 +8,9 @@ import { Metadata } from "next"
 import { PokemonMap } from "@/lib/pokemon"
 import { capitalize } from "@/lib/utils"
 
+// Nickname records are immutable once saved — cache rendered pages
+export const revalidate = 3600
+
 export async function generateMetadata({
     params,
 }: {

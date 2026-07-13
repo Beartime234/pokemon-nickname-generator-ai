@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server"
 import { Ratelimit } from "@upstash/ratelimit"
 import { kv } from "@vercel/kv"
+import { getClientIp } from "@/lib/request"
 
 const ratelimit = new Ratelimit({
     redis: kv,
@@ -15,10 +16,7 @@ export const config = {
 
 export default async function proxy(request: NextRequest) {
     // You could alternatively limit based on user ID or similar
-    const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? '127.0.0.1';
-    const { success, pending, limit, reset, remaining } = await ratelimit.limit(
-        ip
-    );
+    const { success } = await ratelimit.limit(getClientIp(request));
     return success
         ? NextResponse.next()
         : NextResponse.redirect(new URL('/blocked', request.url));

@@ -12,3 +12,8 @@ export interface localStorageData {
 }
 
 export type validMaxLengths = 10 | 12
+
+// Response contract of /api/generate — shared by the route and its client
+export interface generateNicknamesResponse {
+    nicknames: string[]
+}

@@ -11,11 +11,12 @@ import { capitalize } from "@/lib/utils"
 export async function generateMetadata({
     params,
 }: {
-    params: {
+    params: Promise<{
         id: string
-    }
+    }>
 }): Promise<Metadata | undefined> {
-    const data = await get_nicknames(params.id)
+    const { id } = await params
+    const data = await get_nicknames(id)
     if (!data) {
         return
     }
@@ -48,11 +49,12 @@ export async function generateMetadata({
 export default async function Result({
     params,
 }: {
-    params: {
+    params: Promise<{
         id: string
-    }
+    }>
 }) {
-    const data = await get_nicknames(params.id)
+    const { id } = await params
+    const data = await get_nicknames(id)
 
     // TODO - 404 page
     if (!data) {
@@ -75,7 +77,7 @@ export default async function Result({
             </div>
             <div className="pb-1 md:pb-3 space-x-1">
                 <CopyLinkButton
-                    id={params.id}
+                    id={id}
                 />
                 <Button variant={"outline"} asChild>
                     <Link href="/">Create New</Link>

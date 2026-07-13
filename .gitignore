@@ -36,7 +36,4 @@ yarn-error.log*
 next-env.d.ts
 
 
-# Python
-.venv
-__pycache__
 .idea

@@ -3,7 +3,7 @@ import { MetadataRoute } from "next"
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const ids: string[] = []
-    let cursor = 0
+    let cursor = "0"
     do {
         const [nextCursor, keys] = await kv.scan(cursor, {
             match: "*",
@@ -12,7 +12,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         cursor = nextCursor
         ids.push(...keys)
         // recommended max sitemap size is 50,000 URLs
-    } while (cursor !== 0 && ids.length < 50000)
+    } while (cursor !== "0" && ids.length < 50000)
 
     console.log(ids.length)
 

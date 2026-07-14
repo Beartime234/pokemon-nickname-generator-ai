@@ -1,20 +1,18 @@
 "use client"
 
-import { CrossCircledIcon, ReloadIcon } from "@radix-ui/react-icons"
+import { CheckIcon, CopyIcon, CrossCircledIcon, ReloadIcon } from "@radix-ui/react-icons"
 
 import { cn, errorToast } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import Image from "next/image"
-import { Separator } from "@/components/ui/separator"
 import { generate_nicknames } from "@/lib/actions/client"
 import { useRouter } from "next/navigation"
 import React from "react"
 import { artworkUrl, PokemonMap } from "@/lib/pokemon"
 import { validMaxLengths } from "@/lib/actions/types"
 import { ThemeBadge } from "@/components/theme-badge"
-import { useSearchParams} from "next/navigation"
-import Fireworks from "react-canvas-confetti/dist/presets/fireworks";
+import Fireworks from "react-canvas-confetti/dist/presets/fireworks"
 
 
 type NicknameCardProps = {
@@ -69,11 +67,10 @@ export function NicknameCard({
         }
     }
 
-
     return (
         <Card
             className={cn(
-                "h-[450px] w-[350px] md:w-[550px]  md:h-[475px]",
+                "flex min-h-[450px] w-[350px] flex-col md:w-[550px]",
                 className
             )}
             {...props}
@@ -81,28 +78,21 @@ export function NicknameCard({
             {showFireworks && (
                 <Fireworks autorun={{ duration: 700, speed: 2 }} />
             )}
-            <CardHeader className={"sm:pb-1"}>
-                <CardTitle>
+            <CardHeader className="pb-2">
+                <CardTitle className="flex items-center justify-between gap-2">
                     {pokemonName}
-                    {theme && (
-                        <span className={"float-right"}>
-                            <ThemeBadge theme={theme} />
-                        </span>
-                    )}
+                    {theme && <ThemeBadge theme={theme} />}
                 </CardTitle>
             </CardHeader>
-            <CardContent className="grid gap-4 sm:gap-1">
-                <div className="flex items-center h-64 md:p-2">
-                    <Image
-                        className="mx-auto"
-                        alt={pokemonName}
-                        src={artworkUrl(pokemon_no)}
-                        width={225}
-                        height={175}
-                    />
-                </div>
-                <NicknamesList nicknames={nicknames} start={0} end={3} />
-                <NicknamesList nicknames={nicknames} start={3} end={5} />
+            <CardContent className="flex flex-1 flex-col items-center gap-5">
+                <Image
+                    alt={pokemonName}
+                    src={artworkUrl(pokemon_no)}
+                    width={160}
+                    height={160}
+                    className="h-32 w-32 object-contain md:h-40 md:w-40"
+                />
+                <NicknameTags nicknames={nicknames} />
             </CardContent>
             <CardFooter>
                 {isTryingAgain ? (
@@ -125,24 +115,49 @@ export function NicknameCard({
     )
 }
 
-const NicknamesList = ({
-    nicknames,
-    start,
-    end,
-}: {
-    nicknames: string[]
-    start: number
-    end: number
-}) => (
-    <div className="flex h-5 items-center space-x-3 text-sm font-semibold justify-center text-primary lg:text-2xl md:text-xl">
-        {nicknames?.slice(start, end).map((nickname, index, slice) => (
-            <React.Fragment key={index}>
-                <div>{nickname}</div>
-                {/* Only render the separator if it's not the last item */}
-                {index < slice.length - 1 && (
-                    <Separator orientation="vertical" />
-                )}
-            </React.Fragment>
-        ))}
-    </div>
-)
+const NicknameTags = ({ nicknames }: { nicknames: string[] }) => {
+    const [copied, setCopied] = React.useState<number | null>(null)
+    const timer = React.useRef<ReturnType<typeof setTimeout> | undefined>(
+        undefined
+    )
+
+    React.useEffect(() => () => clearTimeout(timer.current), [])
+
+    async function copy(nickname: string, index: number) {
+        try {
+            await navigator.clipboard.writeText(nickname)
+            setCopied(index)
+            clearTimeout(timer.current)
+            timer.current = setTimeout(() => setCopied(null), 1500)
+        } catch {
+            errorToast("Couldn't copy to your clipboard")
+        }
+    }
+
+    return (
+        <div className="flex flex-1 flex-col items-center justify-center gap-3">
+            <ul className="flex flex-wrap items-center justify-center gap-2.5">
+                {nicknames.map((nickname, index) => (
+                    <li key={nickname}>
+                        <button
+                            type="button"
+                            onClick={() => copy(nickname, index)}
+                            aria-label={`Copy nickname ${nickname}`}
+                            className="group flex items-center gap-2 rounded-full border border-primary/30 bg-primary/5 px-4 py-2 text-lg font-semibold text-primary transition-colors hover:bg-primary/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-card md:text-xl"
+                        >
+                            {nickname}
+                            {copied === index ? (
+                                <CheckIcon className="h-4 w-4" />
+                            ) : (
+                                <CopyIcon className="h-4 w-4 opacity-40 transition-opacity group-hover:opacity-100" />
+                            )}
+                        </button>
+                    </li>
+                ))}
+            </ul>
+            <p className="text-xs text-muted-foreground" aria-hidden>
+                Tap a name to copy it
+            </p>
+        </div>
+    )
+}

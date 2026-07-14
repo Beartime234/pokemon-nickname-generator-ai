@@ -6,13 +6,15 @@ import { getClientIp } from "@/lib/request"
 import { generateNicknamesResponse } from "@/lib/actions/types"
 import { themes, type ThemeKey } from "./themes"
 
-const BASE_PROMPT = `You write nicknames for Pokemon. You know every Pokemon's type, appearance, lore, and personality — draw on the specific Pokemon, not generic traits.
+const BASE_PROMPT = `You write nicknames for a specific Pokemon. You know its species, type, appearance, signature moves, lore, and personality in detail — every name must be traceable to THIS Pokemon, not one that would fit any creature.
+
+The specificity test: if a name could be swapped onto a random other Pokemon and still make sense, it's too generic — throw it out and coin something sharper. A bare dictionary word ("Cat", "Pea", "Blaze") is almost never specific enough on its own; fuse it with a real detail of this Pokemon.
 
 Rules:
 - Length is a hard limit: every name must fit the character limit given in the request. It has to fit in the game's name field.
 - Never use the Pokemon's full name or the theme's name verbatim.
-- Names should read like names: capitalized, no spaces, and they flow when said aloud. Prefer wit, puns, and smooth portmanteaus over two words jammed together.
-- Vary the set: each name should take a different angle (a pun, a real word, a portmanteau, a reference) — never five names with the same pattern.`
+- Names should read like names: capitalized, no spaces, and they flow when said aloud. Favor coined words, clever portmanteaus, and puns over two words jammed together or a plain word borrowed as-is.
+- Vary the set: each name should take a different angle on this Pokemon (a signature trait, its typing, a move, its evolution, a bit of lore) — never five names with the same pattern.`
 
 // Same limit as the old FastAPI backend (5/minute per IP)
 const ratelimit = new Ratelimit({
@@ -26,7 +28,14 @@ const paramsSchema = z.object({
     max_length: z.coerce.number().int().min(10).max(20).default(10),
     theme: z.enum(Object.keys(themes) as [ThemeKey, ...ThemeKey[]]).optional(),
     amount: z.coerce.number().int().min(1).max(5).default(5),
+    // Names should suit the Pokemon's whole evolutionary line, not just this stage
+    evolution_line: z
+        .enum(["true", "false"])
+        .default("false")
+        .transform((v) => v === "true"),
 })
+
+const EVOLUTION_RULE = `This name has to work for this Pokemon's ENTIRE evolutionary line, not just its current stage. Pick names that still fit after it evolves and that suited its pre-evolutions too — lean on traits shared across the whole line (typing, body plan, lineage) rather than a quirk of this one form.`
 
 const generationFailed = () =>
     NextResponse.json({ error: "Failed to generate nicknames" }, { status: 502 })
@@ -38,14 +47,17 @@ export async function GET(request: NextRequest) {
     if (!parsed.success) {
         return NextResponse.json({ error: "Invalid parameters" }, { status: 422 })
     }
-    const { pokemon, max_length, theme, amount } = parsed.data
+    const { pokemon, max_length, theme, amount, evolution_line } = parsed.data
 
     const { success } = await ratelimit.limit(getClientIp(request))
     if (!success) {
         return NextResponse.json({ error: "Rate limited" }, { status: 429 })
     }
 
-    const systemPrompt = theme ? `${BASE_PROMPT}\n\n${themes[theme]}` : BASE_PROMPT
+    let systemPrompt = theme ? `${BASE_PROMPT}\n\n${themes[theme]}` : BASE_PROMPT
+    if (evolution_line) {
+        systemPrompt += `\n\n${EVOLUTION_RULE}`
+    }
     const userPrompt = `Suggest ${amount} nicknames for ${pokemon}. Each must be at most ${max_length} characters — count the characters before including a name.`
 
     const openAiResponse = await fetch(

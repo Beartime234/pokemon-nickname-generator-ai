@@ -41,3 +41,7 @@ const themeColors: Record<ThemeKey, ThemeData> = {
 }
 
 export const ThemeMap = new Map<string, ThemeData>(Object.entries(themeColors))
+
+// The accent color for a selected theme, or undefined for no theme / "none"
+export const themeColor = (theme?: string): string | undefined =>
+    theme && theme !== "none" ? ThemeMap.get(theme)?.color : undefined

@@ -12,6 +12,7 @@ import React from "react"
 import { artworkUrl, PokemonMap } from "@/lib/pokemon"
 import { validMaxLengths } from "@/lib/actions/types"
 import { ThemeBadge } from "@/components/theme-badge"
+import { themeColor } from "@/lib/theme"
 import Fireworks from "react-canvas-confetti/dist/presets/fireworks"
 
 
@@ -20,6 +21,7 @@ type NicknameCardProps = {
     length: validMaxLengths
     nicknames: string[]
     theme?: string
+    evolutionLine?: boolean
 } & React.ComponentProps<typeof Card>
 
 // localStorage/matchMedia are read once per render; no change events needed
@@ -30,6 +32,7 @@ export function NicknameCard({
     pokemon_no,
     length,
     theme,
+    evolutionLine,
     nicknames,
     ...props
 }: NicknameCardProps) {
@@ -37,6 +40,8 @@ export function NicknameCard({
 
     const [isTryingAgain, setIsTryingAgain] = React.useState(false)
     const pokemonName = PokemonMap.get(pokemon_no)?.name ?? "MissingNo"
+    // Subtle theme accent: the selected theme's color glows behind the sprite
+    const accent = themeColor(theme)
     // useSyncExternalStore keeps server HTML (no fireworks) and the client
     // read of localStorage/matchMedia from disagreeing at hydration
     const showFireworks = React.useSyncExternalStore(
@@ -59,7 +64,12 @@ export function NicknameCard({
     async function onRetry() {
         setIsTryingAgain(true)
         try {
-            const id = await generate_nicknames(pokemon_no, length, theme)
+            const id = await generate_nicknames(
+                pokemon_no,
+                length,
+                theme,
+                evolutionLine
+            )
             router.push("/nickname/" + id)
         } catch (error: any) {
             errorToast(error.message)
@@ -73,6 +83,13 @@ export function NicknameCard({
                 "flex min-h-[450px] w-[350px] flex-col md:w-[550px]",
                 className
             )}
+            style={
+                accent
+                    ? {
+                          borderColor: `color-mix(in srgb, ${accent} 40%, hsl(var(--border)))`,
+                      }
+                    : undefined
+            }
             {...props}
         >
             {showFireworks && (
@@ -85,13 +102,24 @@ export function NicknameCard({
                 </CardTitle>
             </CardHeader>
             <CardContent className="flex flex-1 flex-col items-center gap-5">
-                <Image
-                    alt={pokemonName}
-                    src={artworkUrl(pokemon_no)}
-                    width={160}
-                    height={160}
-                    className="h-32 w-32 object-contain md:h-40 md:w-40"
-                />
+                <div className="relative flex items-center justify-center">
+                    {accent && (
+                        <div
+                            aria-hidden
+                            className="pointer-events-none absolute inset-0 -m-6"
+                            style={{
+                                background: `radial-gradient(circle at center, color-mix(in srgb, ${accent} 32%, transparent), transparent 68%)`,
+                            }}
+                        />
+                    )}
+                    <Image
+                        alt={pokemonName}
+                        src={artworkUrl(pokemon_no)}
+                        width={160}
+                        height={160}
+                        className="relative h-32 w-32 object-contain md:h-40 md:w-40"
+                    />
+                </div>
                 <NicknameTags nicknames={nicknames} />
             </CardContent>
             <CardFooter>

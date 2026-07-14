@@ -8,8 +8,8 @@ import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { artworkUrl, PokemonMap } from "@/lib/pokemon"
-import { ThemeMap } from "@/lib/theme"
+import { artworkUrl, hasEvolutionLine, PokemonMap } from "@/lib/pokemon"
+import { ThemeMap, themeColor } from "@/lib/theme"
 import { useRouter } from "next/navigation"
 import { generate_nicknames } from "@/lib/actions/client"
 import React, { useEffect } from "react"
@@ -31,6 +31,7 @@ const FormSchema = z.object({
         required_error: "You must select a Pokémon",
     }),
     generationSixPlus: z.boolean().default(false),
+    evolutionLine: z.boolean().default(false),
     theme: z.string().optional(),
 })
 
@@ -44,6 +45,17 @@ export function GenerateForm() {
     const selectedName = selectedPokemon
         ? PokemonMap.get(parseInt(selectedPokemon))?.name
         : undefined
+    const previewAccent = themeColor(form.watch("theme"))
+    // Only offer the evolution toggle for Pokémon that actually have a line
+    const showEvolutionToggle =
+        !!selectedPokemon && hasEvolutionLine(parseInt(selectedPokemon))
+
+    React.useEffect(() => {
+        // Don't submit a stale "true" for a single-stage Pokémon
+        if (!showEvolutionToggle && form.getValues("evolutionLine")) {
+            form.setValue("evolutionLine", false)
+        }
+    }, [showEvolutionToggle, form])
 
     useEffect(() => {
         // Restore the last-used theme once on mount
@@ -72,7 +84,8 @@ export function GenerateForm() {
             const id = await generate_nicknames(
                 pokemon_no,
                 maxLength,
-                data.theme
+                data.theme,
+                data.evolutionLine
             )
             localStorage.setItem("fireworks", "true")
             router.push(
@@ -111,14 +124,24 @@ export function GenerateForm() {
                 {selectedPokemon && selectedName && (
                     <div
                         key={selectedPokemon}
-                        className="animate-loading-message flex justify-center"
+                        className="animate-loading-message relative flex justify-center"
                     >
+                        {previewAccent && (
+                            <div
+                                aria-hidden
+                                className="pointer-events-none absolute inset-0"
+                                style={{
+                                    background: `radial-gradient(circle at center, color-mix(in srgb, ${previewAccent} 30%, transparent), transparent 68%)`,
+                                }}
+                            />
+                        )}
                         <Image
                             src={artworkUrl(parseInt(selectedPokemon))}
                             alt={selectedName}
                             width={128}
                             height={128}
                             priority
+                            className="relative"
                         />
                     </div>
                 )}
@@ -175,6 +198,31 @@ export function GenerateForm() {
                         </FormItem>
                     )}
                 />
+                {showEvolutionToggle && (
+                    <FormField
+                        control={form.control}
+                        name="evolutionLine"
+                        render={({ field }) => (
+                            <FormItem>
+                                <div className="flex flex-row items-center gap-2">
+                                    <FormControl>
+                                        <Switch
+                                            checked={field.value}
+                                            onCheckedChange={field.onChange}
+                                        />
+                                    </FormControl>
+                                    <FormLabel className="!mt-0">
+                                        Fits the whole evolution line
+                                    </FormLabel>
+                                </div>
+                                <FormDescription>
+                                    Pick a name that still suits this Pokémon
+                                    after it evolves (e.g. Onix → Steelix).
+                                </FormDescription>
+                            </FormItem>
+                        )}
+                    />
+                )}
                 <div className="flex justify-center">
                     {isSubmitting ? (
                         <Button disabled>

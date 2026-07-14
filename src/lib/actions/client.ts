@@ -16,7 +16,8 @@ const recentNicknamesMax = 10
 export async function generate_nicknames(
     pokemon_dex: number,
     maxLength: validMaxLengths,
-    theme?: string
+    theme?: string,
+    evolutionLine?: boolean
 ) {
     const pokemonName = PokemonMap.get(pokemon_dex)?.name
 
@@ -31,6 +32,9 @@ export async function generate_nicknames(
     }
     if (theme) {
         url += `&theme=${encodeURIComponent(theme)}`
+    }
+    if (evolutionLine) {
+        url += `&evolution_line=true`
     }
 
     // Fetch from API
@@ -52,6 +56,7 @@ export async function generate_nicknames(
         pokemon: pokemon_dex,
         length: maxLength,
         theme,
+        evolutionLine,
         nicknames: data.nicknames,
     }
     await save_nicknames(uniqueId, kvData)

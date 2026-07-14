@@ -2,6 +2,7 @@ export interface kvData {
     pokemon: number
     length: validMaxLengths
     theme?: string
+    evolutionLine?: boolean
     nicknames: string[]
 }
 

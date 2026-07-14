@@ -12,6 +12,26 @@ export const spriteUrl = (dex: number) =>
 export const artworkUrl = (dex: number) =>
     `https://cdn.jsdelivr.net/gh/PokeAPI/sprites@master/sprites/pokemon/other/official-artwork/${dex}.png`
 
+// Single-stage Pokémon that neither evolve nor are evolved forms (legendaries,
+// Mimikyu, Tauros, Ditto, etc.) — derived from PokeAPI evolution chains. The
+// "fits the whole evolution line" toggle is pointless for these, so we hide it.
+// Storing the smaller set means an unknown dex defaults to showing the toggle.
+const NON_EVOLVING = new Set<number>([
+    115, 127, 128, 131, 132, 142, 144, 145, 146, 150, 151, 201, 213, 214, 225,
+    227, 235, 241, 243, 244, 245, 249, 250, 251, 302, 303, 311, 312, 313, 314,
+    324, 327, 335, 336, 337, 338, 351, 352, 357, 359, 369, 370, 377, 378, 379,
+    380, 381, 382, 383, 384, 385, 386, 417, 441, 442, 455, 479, 480, 481, 482,
+    483, 484, 485, 486, 487, 488, 491, 492, 493, 494, 531, 538, 539, 556, 561,
+    587, 594, 615, 618, 621, 626, 631, 632, 638, 639, 640, 641, 642, 643, 644,
+    645, 646, 647, 648, 649, 676, 701, 702, 703, 707, 716, 717, 718, 719, 720,
+    721, 741, 746, 764, 765, 766, 771, 774, 775, 776, 777, 778, 779, 780, 781,
+    785, 786, 787, 788, 793, 794, 795, 796, 797, 798, 799, 800, 801, 802, 805,
+    806, 807, 808, 809, 845, 870, 871,
+])
+
+export const hasEvolutionLine = (dex: number): boolean =>
+    !NON_EVOLVING.has(dex)
+
 export const PokemonMap = new Map<number, PokemonData>([
     [1, { name: "Bulbasaur" }],
     [2, { name: "Ivysaur" }],

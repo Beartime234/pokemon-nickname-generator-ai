@@ -76,6 +76,7 @@ export default async function Result({
                     length={data.length}
                     nicknames={data.nicknames}
                     theme={data.theme}
+                    evolutionLine={data.evolutionLine}
                 />
             </div>
             <div className="pb-1 md:pb-3 space-x-1">

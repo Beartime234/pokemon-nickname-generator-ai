@@ -3,29 +3,24 @@
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
+import Image from "next/image"
 
 import { Button } from "@/components/ui/button"
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { PokemonMap } from "@/lib/pokemon"
+import { artworkUrl, PokemonMap } from "@/lib/pokemon"
 import { ThemeMap } from "@/lib/theme"
 import { useRouter } from "next/navigation"
 import { generate_nicknames } from "@/lib/actions/client"
 import React, { useEffect } from "react"
-import { QuestionMarkCircledIcon, ReloadIcon } from "@radix-ui/react-icons"
+import { ReloadIcon } from "@radix-ui/react-icons"
 import { Loading } from "@/components/loading"
+import { PokemonCombobox } from "@/components/pokemon-combobox"
 import { Switch } from "@/components/ui/switch"
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 import { validMaxLengths } from "@/lib/actions/types"
 import { errorToast, formatTheme } from "@/lib/utils"
 
-const PokemonOptions = Array.from(PokemonMap.entries()).map(([id, pokemon]) => (
-    <SelectItem key={pokemon.name} value={id.toString()}>
-        {pokemon.name}
-    </SelectItem>
-))
-
-const ThemeOptions = Array.from(ThemeMap.entries()).map(([name, data]) => (
+const ThemeOptions = Array.from(ThemeMap.entries()).map(([name]) => (
     <SelectItem key={name} value={name}>
         {formatTheme(name)}
     </SelectItem>
@@ -33,7 +28,7 @@ const ThemeOptions = Array.from(ThemeMap.entries()).map(([name, data]) => (
 
 const FormSchema = z.object({
     pokemon: z.string({
-        required_error: "You must select a Pokemon",
+        required_error: "You must select a Pokémon",
     }),
     generationSixPlus: z.boolean().default(false),
     theme: z.string().optional(),
@@ -45,17 +40,19 @@ export function GenerateForm() {
     const form = useForm<z.infer<typeof FormSchema>>({
         resolver: zodResolver(FormSchema),
     })
+    const selectedPokemon = form.watch("pokemon")
+    const selectedName = selectedPokemon
+        ? PokemonMap.get(parseInt(selectedPokemon))?.name
+        : undefined
 
     useEffect(() => {
-        // Set the previous selected theme if it exists
-        setTimeout(() => {
-            const previousSelectedTheme = localStorage.getItem(
-                "previousSelectedTheme"
-            )
-            if (previousSelectedTheme) {
-                form.setValue("theme", previousSelectedTheme)
-            }
-        }, 250)
+        // Restore the last-used theme once on mount
+        const previousSelectedTheme = localStorage.getItem(
+            "previousSelectedTheme"
+        )
+        if (previousSelectedTheme && !form.getValues("theme")) {
+            form.setValue("theme", previousSelectedTheme)
+        }
     }, [form])
 
     async function onSubmit(data: z.infer<typeof FormSchema>) {
@@ -92,29 +89,39 @@ export function GenerateForm() {
         <Form {...form}>
             <form
                 onSubmit={form.handleSubmit(onSubmit)}
-                className="w-2/3 space-y-6  lg:w-1/4"
+                className="w-2/3 space-y-6 lg:w-1/3 xl:w-1/4"
             >
                 <FormField
                     control={form.control}
                     name="pokemon"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>Pokemon</FormLabel>
-                            <Select
-                                onValueChange={field.onChange}
-                                value={field.value}
-                            >
-                                <FormControl>
-                                    <SelectTrigger>
-                                        <SelectValue placeholder="Select a Pokemon" />
-                                    </SelectTrigger>
-                                </FormControl>
-                                <SelectContent>{PokemonOptions}</SelectContent>
-                            </Select>
+                            <FormLabel>Pokémon</FormLabel>
+                            <FormControl>
+                                <PokemonCombobox
+                                    value={field.value}
+                                    onChange={field.onChange}
+                                />
+                            </FormControl>
                             <FormMessage />
                         </FormItem>
                     )}
                 />
+
+                {selectedPokemon && selectedName && (
+                    <div
+                        key={selectedPokemon}
+                        className="animate-loading-message flex justify-center"
+                    >
+                        <Image
+                            src={artworkUrl(parseInt(selectedPokemon))}
+                            alt={selectedName}
+                            width={128}
+                            height={128}
+                            priority
+                        />
+                    </div>
+                )}
 
                 <FormField
                     control={form.control}
@@ -128,7 +135,7 @@ export function GenerateForm() {
                             >
                                 <FormControl>
                                     <SelectTrigger>
-                                        <SelectValue placeholder="Select A Theme" />
+                                        <SelectValue placeholder="Choose a theme" />
                                     </SelectTrigger>
                                 </FormControl>
                                 <SelectContent
@@ -148,50 +155,37 @@ export function GenerateForm() {
                     control={form.control}
                     name="generationSixPlus"
                     render={({ field }) => (
-                        <FormItem className="space-x-1">
-                            <div
-                                className={
-                                    "flex flex-row items-center space-x-1.5"
-                                }
-                            >
-                                <FormLabel>
-                                    Generation {field.value ? "6+" : "1-5"}
+                        <FormItem>
+                            <div className="flex flex-row items-center gap-2">
+                                <FormControl>
+                                    <Switch
+                                        checked={field.value}
+                                        onCheckedChange={field.onChange}
+                                    />
+                                </FormControl>
+                                <FormLabel className="!mt-0">
+                                    Generation {field.value ? "6+" : "1-5"}{" "}
+                                    games
                                 </FormLabel>
-                                <TooltipProvider>
-                                    <Tooltip delayDuration={100}>
-                                        <TooltipTrigger asChild>
-                                            <QuestionMarkCircledIcon />
-                                        </TooltipTrigger>
-                                        <TooltipContent>
-                                            Generation 1-5 has a max of 10
-                                            Characters where as 6+ allow 12.
-                                        </TooltipContent>
-                                    </Tooltip>
-                                </TooltipProvider>
                             </div>
-                            <Switch
-                                checked={field.value}
-                                defaultChecked={field.value}
-                                onCheckedChange={field.onChange}
-                            />
+                            <FormDescription>
+                                Gen 1-5 games fit 10-character names, whereas
+                                Gen 6+ fit 12.
+                            </FormDescription>
                         </FormItem>
                     )}
                 />
                 <div className="flex justify-center">
                     {isSubmitting ? (
-                        <>
-                            <Button disabled>
-                                <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
-                                Generating
-                            </Button>
-                        </>
-                    ) : (
-                        <Button type="submit" className="[self-center]">
-                            Generate Nicknames
+                        <Button disabled>
+                            <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
+                            Generating
                         </Button>
+                    ) : (
+                        <Button type="submit">Generate Nicknames</Button>
                     )}
                 </div>
-                <div className="flex justify-center">
+                <div className="flex justify-center pb-16">
                     {isSubmitting && <Loading />}
                 </div>
             </form>

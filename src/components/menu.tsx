@@ -15,7 +15,7 @@ export function Menu() {
                     <a href={"/"} className={"flex justify-center"}>
                         <Image
                             src={"/images/logo-bgremove.png"}
-                            alt={"logo"}
+                            alt={"Pokémon Nickname AI home"}
                             height={35}
                             width={35}
                         />

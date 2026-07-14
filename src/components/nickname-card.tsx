@@ -2,7 +2,7 @@
 
 import { CrossCircledIcon, ReloadIcon } from "@radix-ui/react-icons"
 
-import { cn, errorToast, nextLocalStorage } from "@/lib/utils"
+import { cn, errorToast } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import Image from "next/image"
@@ -10,7 +10,7 @@ import { Separator } from "@/components/ui/separator"
 import { generate_nicknames } from "@/lib/actions/client"
 import { useRouter } from "next/navigation"
 import React from "react"
-import { PokemonMap } from "@/lib/pokemon"
+import { artworkUrl, PokemonMap } from "@/lib/pokemon"
 import { validMaxLengths } from "@/lib/actions/types"
 import { ThemeBadge } from "@/components/theme-badge"
 import { useSearchParams} from "next/navigation"
@@ -24,6 +24,9 @@ type NicknameCardProps = {
     theme?: string
 } & React.ComponentProps<typeof Card>
 
+// localStorage/matchMedia are read once per render; no change events needed
+const emptySubscribe = () => () => {}
+
 export function NicknameCard({
     className,
     pokemon_no,
@@ -36,13 +39,24 @@ export function NicknameCard({
 
     const [isTryingAgain, setIsTryingAgain] = React.useState(false)
     const pokemonName = PokemonMap.get(pokemon_no)?.name ?? "MissingNo"
-    const shouldShowFireworks = nextLocalStorage()?.getItem("fireworks") === "true"
+    // useSyncExternalStore keeps server HTML (no fireworks) and the client
+    // read of localStorage/matchMedia from disagreeing at hydration
+    const showFireworks = React.useSyncExternalStore(
+        emptySubscribe,
+        () =>
+            localStorage.getItem("fireworks") === "true" &&
+            !window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+        () => false
+    )
 
-    if (shouldShowFireworks) {
-        setTimeout(() => {
-            localStorage.setItem("fireworks", "false")
-        }, 5000)
-    }
+    React.useEffect(() => {
+        // Consume the one-shot flag once the confetti has finished
+        const timer = setTimeout(
+            () => localStorage.setItem("fireworks", "false"),
+            5000
+        )
+        return () => clearTimeout(timer)
+    }, [])
 
     async function onRetry() {
         setIsTryingAgain(true)
@@ -55,7 +69,6 @@ export function NicknameCard({
         }
     }
 
-    const imageSrc = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon_no}.png`
 
     return (
         <Card
@@ -65,10 +78,9 @@ export function NicknameCard({
             )}
             {...props}
         >
-            {
-                shouldShowFireworks &&
-                <Fireworks autorun={{ duration: 700, speed: 2 }}/>
-            }
+            {showFireworks && (
+                <Fireworks autorun={{ duration: 700, speed: 2 }} />
+            )}
             <CardHeader className={"sm:pb-1"}>
                 <CardTitle>
                     {pokemonName}
@@ -84,7 +96,7 @@ export function NicknameCard({
                     <Image
                         className="mx-auto"
                         alt={pokemonName}
-                        src={imageSrc}
+                        src={artworkUrl(pokemon_no)}
                         width={225}
                         height={175}
                     />

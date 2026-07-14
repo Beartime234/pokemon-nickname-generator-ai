@@ -2,6 +2,16 @@ interface PokemonData {
     name: string
 }
 
+// PokeAPI sprites via jsDelivr — same GitHub repo, but edge-cached with
+// real CDN headers (raw.githubusercontent.com is uncached and throttled)
+// 96px game sprite — used for compact list rows
+export const spriteUrl = (dex: number) =>
+    `https://cdn.jsdelivr.net/gh/PokeAPI/sprites@master/sprites/pokemon/${dex}.png`
+
+// Full official artwork — used for previews and the result card
+export const artworkUrl = (dex: number) =>
+    `https://cdn.jsdelivr.net/gh/PokeAPI/sprites@master/sprites/pokemon/other/official-artwork/${dex}.png`
+
 export const PokemonMap = new Map<number, PokemonData>([
     [1, { name: "Bulbasaur" }],
     [2, { name: "Ivysaur" }],

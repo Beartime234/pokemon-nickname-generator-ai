@@ -16,14 +16,8 @@ export function Previous() {
         localStorageData[]
     >([])
 
-    const wait = () => new Promise((resolve) => setTimeout(resolve, 100))
-
-    const onLinkClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-        wait().then(() => {
-            setIsOpen(false)
-            e.preventDefault()
-        })
-    }
+    // Close the sheet when a recent-nickname link navigates
+    const onLinkClick = () => setIsOpen(false)
 
     const onOpen = () => {
         // Refresh the recent nicknames on open
@@ -43,15 +37,14 @@ export function Previous() {
                     <SheetTitle>Previous Nicknames</SheetTitle>
                 </SheetHeader>
                 <SheetDescription className={"py-3"}>
-                    {recentNicknames.map((nickname, index) => (
-                        <>
+                    {recentNicknames.map((nickname) => (
+                        <React.Fragment key={nickname.gid}>
                             <RecentNickname
-                                key={index}
                                 nicknameData={nickname}
                                 onClick={onLinkClick}
                             />
                             <br />
-                        </>
+                        </React.Fragment>
                     ))}
                 </SheetDescription>
             </SheetContent>
@@ -60,25 +53,26 @@ export function Previous() {
 }
 
 const RecentNickname = ({
-    key,
     nicknameData,
     onClick,
 }: {
-    key: number
     nicknameData: localStorageData
-    onClick: MouseEventHandler<HTMLButtonElement>
+    onClick: MouseEventHandler<HTMLAnchorElement>
 }) => {
     const pokemonName =
         PokemonMap.get(nicknameData.pokemon)?.name || "MissingNo"
 
     return (
-        <React.Fragment key={key}>
-            <Button variant="link" onClick={onClick}>
-                <Link href={`/nickname/${nicknameData.gid}`}>
+        <>
+            <Button variant="link" asChild>
+                <Link
+                    href={`/nickname/${nicknameData.gid}`}
+                    onClick={onClick}
+                >
                     {pokemonName}
                 </Link>
             </Button>
             {nicknameData.theme && <ThemeBadge theme={nicknameData.theme} />}
-        </React.Fragment>
+        </>
     )
 }

@@ -17,7 +17,8 @@ export async function generate_nicknames(
     pokemon_dex: number,
     maxLength: validMaxLengths,
     theme?: string,
-    evolutionLine?: boolean
+    evolutionLine?: boolean,
+    exclude?: string[]
 ) {
     const pokemonName = PokemonMap.get(pokemon_dex)?.name
 
@@ -35,6 +36,9 @@ export async function generate_nicknames(
     }
     if (evolutionLine) {
         url += `&evolution_line=true`
+    }
+    if (exclude && exclude.length > 0) {
+        url += `&exclude=${encodeURIComponent(exclude.join(","))}`
     }
 
     // Fetch from API

@@ -33,6 +33,20 @@ const paramsSchema = z.object({
         .enum(["true", "false"])
         .default("false")
         .transform((v) => v === "true"),
+    // Comma-separated names the user already rejected (from "I don't like these")
+    exclude: z
+        .string()
+        .max(300)
+        .optional()
+        .transform((v) =>
+            v
+                ? v
+                      .split(",")
+                      .map((s) => s.trim())
+                      .filter(Boolean)
+                      .slice(0, 25)
+                : []
+        ),
 })
 
 const EVOLUTION_RULE = `This name has to work for this Pokemon's ENTIRE evolutionary line, not just its current stage. Pick names that still fit after it evolves and that suited its pre-evolutions too — lean on traits shared across the whole line (typing, body plan, lineage) rather than a quirk of this one form.`
@@ -47,7 +61,8 @@ export async function GET(request: NextRequest) {
     if (!parsed.success) {
         return NextResponse.json({ error: "Invalid parameters" }, { status: 422 })
     }
-    const { pokemon, max_length, theme, amount, evolution_line } = parsed.data
+    const { pokemon, max_length, theme, amount, evolution_line, exclude } =
+        parsed.data
 
     const { success } = await ratelimit.limit(getClientIp(request))
     if (!success) {
@@ -58,7 +73,10 @@ export async function GET(request: NextRequest) {
     if (evolution_line) {
         systemPrompt += `\n\n${EVOLUTION_RULE}`
     }
-    const userPrompt = `Suggest ${amount} nicknames for ${pokemon}. Each must be at most ${max_length} characters — count the characters before including a name.`
+    let userPrompt = `Suggest ${amount} nicknames for ${pokemon}. Each must be at most ${max_length} characters — count the characters before including a name.`
+    if (exclude.length > 0) {
+        userPrompt += ` The user already rejected these names — do not suggest any of them again, and avoid close variations: ${exclude.join(", ")}.`
+    }
 
     const openAiResponse = await fetch(
         "https://api.openai.com/v1/chat/completions",

@@ -68,7 +68,8 @@ export function NicknameCard({
                 pokemon_no,
                 length,
                 theme,
-                evolutionLine
+                evolutionLine,
+                nicknames // don't hand back the names they just rejected
             )
             router.push("/nickname/" + id)
         } catch (error: any) {

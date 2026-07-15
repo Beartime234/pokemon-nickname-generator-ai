@@ -38,6 +38,14 @@ const themeColors: Record<ThemeKey, ThemeData> = {
     dinosaurs: { color: "darkgreen" },
     insects: { color: "#9a3412" },
     cats: { color: "darkviolet" },
+    dogs: { color: "#6b4423" },
+    birds: { color: "#155e75" },
+    ocean: { color: "#0f766e" },
+    weather: { color: "#475569" },
+    gemstones: { color: "#7e22ce" },
+    robots: { color: "#3f3f46" },
+    spooky: { color: "#7c2d12" },
+    superheroes: { color: "#1e40af" },
 }
 
 export const ThemeMap = new Map<string, ThemeData>(Object.entries(themeColors))
